@@ -64,6 +64,9 @@
   # Configure console keymap
   console.keyMap = "de";
 
+  # Enable Flatpak Support
+  services.flatpak.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -96,8 +99,10 @@
     ];
   };
 
-  # Install firefox.
+  # Install Applications
   programs.firefox.enable = true;
+  programs.neovim.enable = true;
+  programs.steam.enable = true;
   
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -108,6 +113,9 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     git
+    vscode
+    discord
+    vlc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
