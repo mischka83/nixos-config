@@ -64,11 +64,20 @@
   # Configure console keymap
   console.keyMap = "de";
 
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
   # Enable Flatpak Support
   services.flatpak.enable = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -116,6 +125,15 @@
     vscode
     discord
     vlc
+  ];
+
+  # Flathub Remote hinzufügen
+  programs.flatpak.remotes = [
+    {
+      name = "flathub";
+      url = "https://flathub.org/repo/flathub.flatpakrepo";
+      gpgVerify = true;
+    }
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
