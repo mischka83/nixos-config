@@ -12,12 +12,28 @@
 
   programs.zsh = {
     enable = true;
-    ohMyZsh = {
-      enable = true;
-      theme = "agnoster";
-      plugins = [ "git" "z" ];
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      ll = "ls -alh";
+      gs = "git status";
     };
+
+    history = {
+      size = 10000;
+      save = true;
+    };
+
+    # Optional: eigenes Theme
+    promptInit = ''
+      autoload -Uz promptinit
+      promptinit
+      prompt pure
+    '';
   };
+
 
   home.packages = with pkgs; [
     htop
