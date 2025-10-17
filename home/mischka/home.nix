@@ -13,8 +13,8 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
 
     shellAliases = {
       ll = "ls -alh";
@@ -26,13 +26,13 @@
       save = true;
     };
 
-    # Optional: eigenes Theme
     promptInit = ''
       autoload -Uz promptinit
       promptinit
       prompt pure
     '';
   };
+
 
 
   home.packages = with pkgs; [
