@@ -5,13 +5,16 @@
 
   environment.systemPackages = with pkgs; [
     # --- System-Tools ---
-    pciutils stow ffmpeg freshfetch nodejs clinfo tree
+    pciutils stow ffmpeg freshfetch clinfo tree
 
     # --- Productivity ---
-    vscode libreoffice qownnotes
+    libreoffice qownnotes
+
+    # --- Development ---
+    vscode nodejs powershell
 
     # --- Communication ---
-    discord teams-for-linux
+    discord teams-for-linux telegram-desktop zapzap
 
     # --- Media ---
     vlc gimp-with-plugins

@@ -28,7 +28,11 @@
           ./hosts/nixos-btw/configuration.nix
           
           # Optional: Home Manager aktivieren
-          # inputs.home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.mischka = import ./home/mischka/home.nix;
+          }
         ];
 
         # Spezialargumente, falls du Inputs in der config brauchst

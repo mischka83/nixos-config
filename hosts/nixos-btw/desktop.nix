@@ -13,4 +13,10 @@
   # Tastatur-Layouts
   services.xserver.xkb.layout = "de";
   console.keyMap = "de";
+
+  # ✅ NetworkManager aktivieren
+  networking.networkmanager.enable = true;
+
+  # ✅ Zeitzone setzen
+  time.timeZone = "Europe/Berlin";
 }
