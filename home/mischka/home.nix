@@ -26,14 +26,12 @@
       save = true;
     };
 
-    promptInit = ''
+    initExtra = ''
       autoload -Uz promptinit
       promptinit
       prompt pure
     '';
   };
-
-
 
   home.packages = with pkgs; [
     htop
