@@ -8,9 +8,10 @@
     # --- Hardware Profile (z. B. für Lenovo Legion) ---
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    # ✅ Home Manager hinzufügen (zur NixOS-Version passend)
+    # --- Home Manager hinzufügen (zur NixOS-Version passend)
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
   };
 
   outputs = { self, nixpkgs, nixos-hardware, ... }@inputs: {
@@ -29,6 +30,7 @@
           inputs.home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.mischka = import ./home/mischka/home.nix;
           }
         ];
