@@ -4,6 +4,8 @@
   imports = [
     ./user.nix
     ./zsh.nix
+    ./vscode.nix
+    ./dotfiles.nix
   ];
 
   # Git nur für diesen Benutzer
@@ -33,22 +35,5 @@
     # --- Development Tools ---
     vscode gcc lazygit
   ];
-
-  programs.neovim = {
-    enable = true;
-    package = pkgs.neovim-unwrapped;
-    viAlias = true;
-    vimAlias = true;
-    withNodeJs = true;
-    withPython3 = true;
-    withRuby = false;
-  };
-
-  # --- dotfiles ---
-  home.file = {
-    ".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/mischka/dotfiles/nvim";
-    };
-  };
 
 }
