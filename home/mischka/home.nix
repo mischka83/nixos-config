@@ -2,12 +2,9 @@
 
 {
   imports = [
+    ./user.nix
     ./zsh.nix
   ];
-
-  home.username = "mischka";
-  home.homeDirectory = "/home/mischka";
-  home.stateVersion = "25.05"; # Wichtig! Entspricht NixOS Version
 
   # Git nur für diesen Benutzer
   programs.git = {
