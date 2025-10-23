@@ -5,7 +5,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_1;
+  boot.kernelPackages = pkgs.linuxPackages_6_16;
   boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
   boot.blacklistedKernelModules = [ "elan_i2c" ];
 
@@ -15,6 +15,9 @@
 
   # CPU Microcode
   hardware.cpu.amd.updateMicrocode = true;
+
+  # Enable Firmware 
+  hardware.enableAllFirmware = true;
 
   # Bluetooth
   hardware.bluetooth = {

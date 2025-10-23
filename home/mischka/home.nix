@@ -1,6 +1,10 @@
 { config, pkgs, inputs, ... }:
 
 {
+  imports = [
+    ./zsh.nix
+  ];
+
   home.username = "mischka";
   home.homeDirectory = "/home/mischka";
   home.stateVersion = "25.05"; # Wichtig! Entspricht NixOS Version
@@ -12,49 +16,10 @@
     userEmail = "CEwert@gmx.net";
   };
 
-  # global tools
-  programs.fzf.enable = true;
-  programs.zoxide.enable = true;
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
-    oh-my-zsh = {
-      enable = true;
-      custom = "$HOME/.oh-my-zsh/custom/";
-      theme = "powerlevel10k/powerlevel10k";
-      plugins = [ "git" "z" "fzf" ];
-    };
-
-    shellAliases = {
-      ll = "ls -alh";
-      gs = "git status";
-    };
-
-    history.size = 10000;
-
-    initContent = ''
-      # Powerlevel10k-Konfiguration laden (wenn vorhanden)
-      [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
-      # Freshfetch / Neofetch nur in interaktiven Shells anzeigen
-      if [[ $- == *i* ]]; then
-        if command -v freshfetch >/dev/null 2>&1; then
-          freshfetch
-        elif command -v neofetch >/dev/null 2>&1; then
-          neofetch
-        fi
-      fi
-    '';
-  };
-
   # Benutzerpakete
   home.packages = with pkgs; [
     # --- Productivity ---
-    libreoffice qownnotes thunderbird stirling-pdf
+    libreoffice qownnotes thunderbird stirling-pdf bitwarden-desktop
 
     # --- Media ---
     vlc gimp-with-plugins parabolic delfin
@@ -63,10 +28,13 @@
     ferdium teams-for-linux
 
     # --- CLI-Tools ---
-    htop bat neofetch freshfetch
+    htop bat neofetch freshfetch ripgrep fd wget kitty imagemagick
+
+    # --- File Management ---
+    unzip unrar
 
     # --- Development Tools ---
-    vscode
+    vscode gcc lazygit
   ];
 
   programs.neovim = {

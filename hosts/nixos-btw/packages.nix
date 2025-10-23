@@ -6,7 +6,7 @@
   # --- Systemweite Pakete ---
   environment.systemPackages = with pkgs; [
     # --- System-Tools ---
-    pciutils stow ffmpeg clinfo tree mission-center
+    pciutils stow ffmpeg clinfo tree mission-center usbutils
 
     # --- Development (Core, systemweit) ---
     nodejs powershell
