@@ -12,6 +12,9 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # --- Hyperland Window Manager (optional) ---
+    hyprland.url = "github:hyprwm/Hyprland";
+    
   };
 
   outputs = { self, nixpkgs, nixos-hardware, ... }@inputs: {
