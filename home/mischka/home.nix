@@ -18,7 +18,7 @@
   # Benutzerpakete
   home.packages = with pkgs; [
     # --- Productivity ---
-    libreoffice qownnotes thunderbird stirling-pdf bitwarden-desktop
+    libreoffice drawio qownnotes thunderbird stirling-pdf bitwarden-desktop
 
     # --- Media ---
     vlc gimp-with-plugins parabolic delfin
@@ -33,7 +33,7 @@
     unzip unrar
 
     # --- Development Tools ---
-    vscode gcc lazygit
+    powershell gcc lazygit
   ];
 
 }
