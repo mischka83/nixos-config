@@ -25,7 +25,7 @@
 
       if [[ $- == *i* ]]; then
         if command -v freshfetch >/dev/null 2>&1; then
-          freshfetch
+          fastfetch
         elif command -v neofetch >/dev/null 2>&1; then
           neofetch
         fi

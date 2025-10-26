@@ -5,6 +5,7 @@
     ./user.nix
     ./zsh.nix
     ./vscode.nix
+    ./neovim.nix
     ./dotfiles.nix
   ];
 
@@ -27,7 +28,7 @@
     ferdium teams-for-linux
 
     # --- CLI-Tools ---
-    htop bat neofetch freshfetch ripgrep fd wget kitty imagemagick
+    htop bat neofetch freshfetch fastfetch ripgrep fd wget kitty imagemagick bind
 
     # --- File Management ---
     unzip unrar

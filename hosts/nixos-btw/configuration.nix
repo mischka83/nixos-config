@@ -6,7 +6,9 @@
   ##############################################
   imports = [
     ../../hardware-configuration.nix
-    ./i18n.nix
+    ../../modules/core/system.nix
+    ./desktop.nix
+    #./i18n.nix
     ./hardware.nix
     ./desktop.nix
     ./audio.nix

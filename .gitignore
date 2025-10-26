@@ -1,0 +1,67 @@
+# General: Editor/IDE, temp files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.bak
+*.orig
+.DS_Store
+Thumbs.db
+
+# Nix-Build-Artifacts
+/result
+/result-*
+*.drv
+*.nar
+*.gcroot
+
+# Cache / Build-Folder
+.nix-profile
+.nix-defexpr
+.nix-channels
+.nix-*
+.cache/
+node_modules/
+target/
+dist/
+
+# Home Manager
+home-manager-activation*
+home-manager-result*
+
+# Sensitive Files & Folders
+secrets/
+private/
+*.secret
+private.nix
+secret-*.nix
+*.pem
+*.key
+*.p12
+*.asc
+*.gpg
+.env
+.env.*
+credentials
+auth.json
+
+# SSH / GPG / keys
+.ssh/
+.gnupg/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Other language/tool artefacts
+__pycache__/
+*.pyc
+venv/
+.env
+.venv/
+
+# Logs
+*.log

@@ -24,6 +24,9 @@
 
     # --- Gaming Plattform ---
     adwsteamgtk
+
+    # --- Hyprland Apps ---
+    rofi waybar
   ];
 
   # Programme, die systemweit aktiviert werden
