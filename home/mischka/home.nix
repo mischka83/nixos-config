@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./user.nix
+    ../../modules/core/user.nix
     ./zsh.nix
     ./vscode.nix
     ./neovim.nix
