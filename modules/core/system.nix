@@ -12,7 +12,7 @@
   i18n = {
     defaultLocale = "de_DE.UTF-8";
 
-    # Alle LC_…-Variablen auf denselben Wert setzen
+    # 
     extraLocaleSettings = builtins.listToAttrs (map (lc: {
       name = lc;
       value = "de_DE.UTF-8";
@@ -28,6 +28,9 @@
       "LC_TIME"
     ]);
   };
+
+  # ⌨️ Keyboard Layout
+  console.keyMap = "de";
 
   ##############################################
   # 🧩 System Version

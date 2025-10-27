@@ -1,6 +1,6 @@
 {
 
-  keyboardLayout = "us";
-  consoleKeyMap = "us";
+  keyboardLayout = "de"";
+  consoleKeyMap = "de";
 
 }

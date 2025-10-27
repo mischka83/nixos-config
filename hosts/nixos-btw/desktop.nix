@@ -1,13 +1,7 @@
 { inputs, config, pkgs, ... }:
 
 {
-  services.xserver.enable = true;
-
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
-  
+ 
   # KDE Plasma 6 aktivieren
   services.desktopManager.plasma6.enable = true;
 
@@ -21,13 +15,7 @@
     withUWSM = true;
   };
 
-  # Tastatur-Layouts
-  services.xserver.xkb.layout = "de";
-  console.keyMap = "de";
 
-  # ✅ NetworkManager aktivieren
-  networking.networkmanager.enable = true;
 
-  # ✅ Zeitzone setzen
-  time.timeZone = "Europe/Berlin";
+
 }

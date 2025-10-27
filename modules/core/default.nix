@@ -2,10 +2,12 @@
 
 {
 imports = [
-    ./system.nix
+    ./network.nix
+    ./sddm.nix
     ./security.nix
     ./services.nix
-    ./user.nix
+    ./system.nix
+    ./xserver.nix
   ];
 
 }
