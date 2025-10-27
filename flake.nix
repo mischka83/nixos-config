@@ -27,7 +27,7 @@
           nixos-hardware.nixosModules.lenovo-legion-16achg6-hybrid
 
           # Deine Hauptsystemkonfiguration
-          ./hosts/nixos-btw/configuration.nix
+          ./hosts/nixos-btw/default.nix
           
           # Optional: Home Manager aktivieren
           inputs.home-manager.nixosModules.home-manager {

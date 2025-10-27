@@ -3,10 +3,9 @@
 {
   imports = [
     ../../modules/core/user.nix
-    ../../modules/core/vscode.nix
-    ../../modules/core/zsh/default.nix
+    ../../modules/home/vscode.nix
+    ../../modules/home/zsh/default.nix
     ./neovim.nix
-    ./dotfiles.nix
   ];
 
   # Git nur für diesen Benutzer
@@ -21,7 +20,7 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/mischka/dotfiles/nvim";
     };
   };
-  
+
   # Benutzerpakete
   home.packages = with pkgs; [
     # --- Productivity ---
