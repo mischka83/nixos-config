@@ -3,8 +3,8 @@
 {
   imports = [
     ../../modules/core/user.nix
-    ./zsh.nix
-    ./vscode.nix
+    ../../modules/core/vscode.nix
+    ../../modules/core/zsh/default.nix
     ./neovim.nix
     ./dotfiles.nix
   ];
@@ -16,6 +16,12 @@
     userEmail = "CEwert@gmx.net";
   };
 
+  home.file = {
+    ".config/nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/mischka/dotfiles/nvim";
+    };
+  };
+  
   # Benutzerpakete
   home.packages = with pkgs; [
     # --- Productivity ---
