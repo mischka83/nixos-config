@@ -4,7 +4,9 @@
   # Tastatur-Layouts
   services.xserver = {
     enable = true;
-    xkb.layout = "de";
-    variant = "";
+    xkb = {
+      layout = "de";
+      variant = "";
+    };
   };
 }
