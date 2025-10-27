@@ -5,13 +5,12 @@
   # 🧩 Imports (Modular)
   ##############################################
   imports = [
+    ../../modules/core
     ../../hardware-configuration.nix
-    ../../modules/core/system.nix
     ./desktop.nix
-    #./i18n.nix
     ./hardware.nix
     ./desktop.nix
-    ./audio.nix
+    #./audio.nix
     ./packages.nix
     ./users.nix
   ];
