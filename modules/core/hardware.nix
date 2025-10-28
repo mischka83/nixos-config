@@ -1,15 +1,18 @@
 { config, pkgs, ... }:
+
 {
-  # CPU Microcode
-  hardware.cpu.amd.updateMicrocode = true;
 
-  # Enable Firmware 
-  hardware.enableAllFirmware = true;
-
-  # Bluetooth
-  bluetooth = {
-    enable = true;
-    powerOnBoot = true;
+  hardware ={
+    # CPU Microcode
+    cpu.amd.updateMicrocode = true;
+    # Enable Firmware 
+    enableAllFirmware = true;
+    # Bluetooth
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
   };
+
 }
 

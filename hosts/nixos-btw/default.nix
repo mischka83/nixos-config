@@ -8,10 +8,7 @@
     ../../modules/core
     ../../hardware-configuration.nix
     ./desktop.nix
-    #./hardware.nix
-    ./desktop.nix
-    #./audio.nix
-    ./packages.nix
+    #./packages.nix
     ./users.nix
   ];
 
