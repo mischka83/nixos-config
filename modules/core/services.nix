@@ -16,6 +16,7 @@
       wireplumber.enable = true; # moderner Session-Manager
     };
     pulseaudio.enable = false;
+
   };
   
 

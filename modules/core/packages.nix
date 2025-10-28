@@ -2,13 +2,20 @@
 
 {
   # Hyperland Window Manager konfigurieren
-  programs.hyprland = {
-    enable = true;
-    # set the flake package
-    #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # make sure to also set the portal package, so that they are in sync
-    #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    withUWSM = true;
+  programs = {
+    
+    hyprland = {
+      enable = true;
+      # set the flake package
+      #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      # make sure to also set the portal package, so that they are in sync
+      #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      withUWSM = true;
+    };
+
+    firefox.enable = true;  # Browser systemweit
+    steam.enable = true;    # Spielplattform systemweit
+  
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -39,16 +46,4 @@
     rofi waybar
   ];
 
-  # Programme, die systemweit aktiviert werden
-  programs = {
-    firefox.enable = true;  # Browser systemweit
-    steam.enable = true;    # Spielplattform systemweit
-  };
-
-  # Flatpak (Flathub)
-  services.flatpak.enable = true;
-  environment.etc."flatpak/remotes.d/flathub.flatpakrepo".source = pkgs.fetchurl {
-    url = "https://flathub.org/repo/flathub.flatpakrepo";
-    sha256 = "0fm0zvlf4fipqfhazx3jdx1d8g0mvbpky1rh6riy3nb11qjxsw9k";
-  };
 }
