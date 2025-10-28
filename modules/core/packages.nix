@@ -45,11 +45,6 @@
     steam.enable = true;    # Spielplattform systemweit
   };
 
-  # Nerd Fonts für das System
-  fonts.packages = with pkgs.nerd-fonts; [
-    droid-sans-mono symbols-only bigblue-terminal heavy-data hurmit
-  ];
-
   # Flatpak (Flathub)
   services.flatpak.enable = true;
   environment.etc."flatpak/remotes.d/flathub.flatpakrepo".source = pkgs.fetchurl {
