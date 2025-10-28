@@ -3,6 +3,9 @@
 {
 
   services = {
+    # Firmware & SSD
+    fwupd.enable = true;
+    fstrim.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
