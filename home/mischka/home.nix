@@ -5,7 +5,6 @@
     ../../modules/core/user.nix
     ../../modules/home/vscode.nix
     ../../modules/home/zsh/default.nix
-    ./neovim.nix
   ];
 
   # Git nur für diesen Benutzer

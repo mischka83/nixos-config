@@ -7,8 +7,6 @@
   imports = [
     ../../modules/core
     ../../hardware-configuration.nix
-    #./desktop.nix
-    #./packages.nix
     ./users.nix
   ];
 

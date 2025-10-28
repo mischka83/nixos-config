@@ -3,7 +3,10 @@
 {
   # Hyperland Window Manager konfigurieren
   programs = {
-    
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
     hyprland = {
       enable = true;
       # set the flake package
