@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
     security = {
-      rtkit.enable = true;
+      rtkit.enable = true; # RealtimeKit for low-latency audio
     };
 }

@@ -8,8 +8,8 @@
     ../../modules/core
     ./hardware.nix
     ./host-packages.nix
-    ./users.nix
   ];
+
 
   ##############################################
   # ⚙️ Nix & System Maintenance

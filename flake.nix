@@ -11,13 +11,19 @@
     # --- Home Manager hinzufügen (zur NixOS-Version passend)
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
     # --- Hyperland Window Manager (optional) ---
     hyprland.url = "github:hyprwm/Hyprland";
     
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, plasma-manager, ... }@inputs: {
     nixosConfigurations = {
       nixos-btw = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -28,7 +34,9 @@
 
           # Deine Hauptsystemkonfiguration
           ./hosts/nixos-btw/default.nix
-          
+
+          #inputs.plasma-manager.homeManagerModules.plasma-manager
+
           # Optional: Home Manager aktivieren
           inputs.home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;

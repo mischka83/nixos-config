@@ -12,6 +12,7 @@ imports = [
     ./security.nix
     ./services.nix
     ./system.nix
+    ./users.nix
     ./xserver.nix
   ];
 

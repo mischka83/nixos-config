@@ -2,10 +2,19 @@
 
 {
   imports = [
-    ../../modules/core/user.nix
+    #../../modules/core/user.nix
     ../../modules/home/vscode.nix
     ../../modules/home/zsh/default.nix
+    #inputs.plasma-manager.homeModules.plasma-manager
   ];
+
+  #programs.plasma-manager.enable = true;
+  
+  home = {
+      username = "mischka";
+      homeDirectory = "/home/mischka";
+      stateVersion = "25.05";
+  };
 
   # Git nur für diesen Benutzer
   programs.git = {
