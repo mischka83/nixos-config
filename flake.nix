@@ -8,6 +8,9 @@
     # --- Hardware Profile (z. B. für Lenovo Legion) ---
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # 
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
     # --- Home Manager hinzufügen (zur NixOS-Version passend)
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +26,7 @@
     
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, plasma-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, plasma-manager, nix-flatpak, ... }@inputs: {
     nixosConfigurations = {
       nixos-btw = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -35,14 +38,19 @@
           # Deine Hauptsystemkonfiguration
           ./hosts/nixos-btw/default.nix
 
-          #inputs.plasma-manager.homeManagerModules.plasma-manager
+          nix-flatpak.nixosModules.nix-flatpak
 
           # Optional: Home Manager aktivieren
           inputs.home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.mischka = import ./home/mischka/home.nix;
+            home-manager.users.mischka = {
+              imports = [
+                ./home/mischka/home.nix
+                plasma-manager.homeModules.plasma-manager
+              ];
+            };
           }
         ];
 

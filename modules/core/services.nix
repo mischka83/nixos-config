@@ -3,7 +3,7 @@
 {
   services = {
   
-    #desktopManager.plasma6.enable = true;
+    desktopManager.plasma6.enable = true;
     # Firmware & SSD
     fwupd.enable = true;
     fstrim.enable = true;
