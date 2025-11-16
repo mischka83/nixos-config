@@ -4,6 +4,7 @@
   imports = [
     ../../modules/home/base.nix
     ../../modules/home/dotfiles.nix
+    ../../modules/home/firefox.nix
     ../../modules/home/git.nix
     ../../modules/home/packages.nix
     ../../modules/home/plasma.nix

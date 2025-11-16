@@ -51,6 +51,7 @@
                 plasma-manager.homeModules.plasma-manager
               ];
             };
+            home-manager.backupFileExtension = "backup";
           }
         ];
 

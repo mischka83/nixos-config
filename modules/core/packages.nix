@@ -16,7 +16,7 @@
       withUWSM = true;
     };
 
-    firefox.enable = true;  # Browser systemweit
+    # firefox.enable = true;  # Browser systemweit
     steam.enable = true;    # Spielplattform systemweit
   
   };
@@ -41,6 +41,7 @@
     kdePackages.kdeconnect-kde
     kdePackages.discover
     kdePackages.krunner
+    papirus-icon-theme
 
     # --- Gaming Plattform ---
     adwsteamgtk
