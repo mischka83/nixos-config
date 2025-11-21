@@ -19,6 +19,7 @@
     unzip unrar
 
     # --- Development Tools ---
-    powershell gcc lazygit
+    powershell gcc lazygit openssl
+
   ];
 }

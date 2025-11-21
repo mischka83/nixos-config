@@ -18,7 +18,25 @@
 
     # firefox.enable = true;  # Browser systemweit
     steam.enable = true;    # Spielplattform systemweit
-  
+    zoom-us.enable = true;  # Zoom Client systemweit
+    obs-studio = {
+      enable = true;
+      # optional Nvidia hardware acceleration
+      package = (
+        pkgs.obs-studio.override {
+          cudaSupport = true;
+        }
+      );
+
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-backgroundremoval
+        obs-pipewire-audio-capture
+        obs-vaapi #optional AMD hardware acceleration
+        obs-gstreamer
+        obs-vkcapture
+      ];
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -29,7 +47,10 @@
     pciutils stow ffmpeg clinfo tree mission-center usbutils
 
     # --- Development (Core, systemweit) ---
-    nodejs powershell
+    nodejs powershell poetry 
+    
+    # --- Development (Container / Virtualisierung) ---
+    winboat docker freerdp
 
     # --- KDE-Apps (Desktop-Grundausstattung) ---
     kdePackages.kate
