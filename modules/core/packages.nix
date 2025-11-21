@@ -50,7 +50,7 @@
     nodejs powershell poetry 
     
     # --- Development (Container / Virtualisierung) ---
-    winboat docker freerdp
+    freerdp
 
     # --- KDE-Apps (Desktop-Grundausstattung) ---
     kdePackages.kate

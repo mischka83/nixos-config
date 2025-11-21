@@ -3,7 +3,7 @@
 {
 imports = [
     ./boot.nix
-    ./docker.nix
+    ./virtualisation.nix
     ./flatpak.nix
     ./fonts.nix
     ./hardware.nix
