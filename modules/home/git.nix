@@ -3,7 +3,9 @@
 {
   programs.git = {
     enable = true;
-    userName = "Christian Ewert";
-    userEmail = "CEwert@gmx.net";
+    settings = {
+      user.emailuser = "Christian Ewert";
+      user.nameuser = "CEwert@gmx.net";
+    };
   };
 }

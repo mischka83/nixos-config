@@ -16,6 +16,8 @@
     shellAliases = {
       ll = "ls -alh";
       gs = "git status";
+      fu = "sudo nix flake update";
+      nixbuild = "sudo nix flake update && sudo nixos-rebuild switch --flake /home/mischka/nixos-config#nixos-btw";
     };
 
     history.size = 10000;

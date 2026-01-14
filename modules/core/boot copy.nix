@@ -19,7 +19,7 @@ in
 {
   boot = {
     # Kernel
-    kernelPackages = pkgs.linuxPackages_6_12; # LTS Kernel
+    kernelPackages = customLinux;
 
     kernelParams = [
       "amdgpu.dc=1"

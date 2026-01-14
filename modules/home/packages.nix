@@ -19,7 +19,13 @@
     unzip unrar
 
     # --- Development Tools ---
-    powershell gcc lazygit openssl
+    powershell gcc lazygit openssl jetbrains.rider
 
   ];
+  
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
 }

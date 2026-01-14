@@ -3,7 +3,7 @@
 
   inputs = {
     # --- NixOS Packages ---
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     # --- Hardware Profile (z. B. für Lenovo Legion) ---
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -12,7 +12,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     # --- Home Manager hinzufügen (zur NixOS-Version passend)
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     
     plasma-manager = {
