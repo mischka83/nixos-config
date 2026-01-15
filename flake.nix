@@ -58,6 +58,33 @@
         # Spezialargumente, falls du Inputs in der config brauchst
         specialArgs = { inherit inputs; };
       };
+
+      nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        modules = [
+          # Deine Hauptsystemkonfiguration
+          ./hosts/nixos/default.nix
+
+          nix-flatpak.nixosModules.nix-flatpak
+
+          # Optional: Home Manager aktivieren
+          inputs.home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.mischka = {
+              imports = [
+                ./home/mischka/home.nix
+                plasma-manager.homeModules.plasma-manager
+              ];
+            };
+          }
+        ];
+
+        # Spezialargumente, falls du Inputs in der config brauchst
+        specialArgs = { inherit inputs; };
+      };
     };
   };
 }
