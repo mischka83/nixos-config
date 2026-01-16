@@ -10,6 +10,7 @@
     ./host-packages.nix
   ];
 
+  networking.hostName = "nixos-btw"; # Define your hostname.
 
   ##############################################
   # ⚙️ Nix & System Maintenance
