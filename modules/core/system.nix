@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, versions, ... }:
 
 {
   ##############################################
@@ -35,5 +35,5 @@
   ##############################################
   # 🧩 System Version
   ##############################################
-  system.stateVersion = "25.11";
+  system.stateVersion = versions.systemStateVersion;
 }

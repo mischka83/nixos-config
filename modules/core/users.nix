@@ -1,13 +1,15 @@
-{ config, pkgs, ... }:
+{ pkgs, users, ... }:
 
+let user = users.defaultUser; in
 {
 
-  users.users.mischka = {
+  users.users.${user.name} = {
     isNormalUser = true;
-    description = "Christian Ewert";
-    extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ]; # 'wheel' = sudo-Rechte
-    packages = with pkgs; [ ];
-    shell = pkgs.zsh;
+    description = user.fullName;
+    extraGroups = user.groups;
+    shell = pkgs.${user.shell};
     ignoreShellProgramCheck = true;
+    packages = with pkgs; [ ];
+    home = user.home;
   };
 }

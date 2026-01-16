@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
+{ pkgs, users, versions, ... }:
+
+let user =  users.defaultUser; in
 {
   home = {
-    username = "mischka";
-    homeDirectory = "/home/mischka";
-    stateVersion = "25.11";
+    username = user.name;
+    homeDirectory = user.home;
+    stateVersion = versions.homeStateVersion;
   };
 }

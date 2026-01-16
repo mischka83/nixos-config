@@ -1,90 +1,89 @@
 {
-  description = "Mischkas NixOS configuration (KDE Plasma 6)";
+  description = "Mischkas NixOS configuration";
 
   inputs = {
-    # --- NixOS Packages ---
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-
-    # --- Hardware Profile (z. B. für Lenovo Legion) ---
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    # 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
-    # --- Home Manager hinzufügen (zur NixOS-Version passend)
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    
+
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
 
-    # --- Hyperland Window Manager (optional) ---
     hyprland.url = "github:hyprwm/Hyprland";
-    
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, plasma-manager, nix-flatpak, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, nix-flatpak, plasma-manager, home-manager, ... }@inputs:
+  let
+    system = "x86_64-linux";
+
+    # ⭐ Default Host
+    defaultHost = "nixos-btw";
+
+    # ⭐ Versions zentral importieren
+    versions = import ./lib/versions.nix;
+
+    # ⭐ User Definitionen zentral importieren
+    users = import ./lib/users.nix;
+
+    # kleine Factory
+    mkHost = { hostName, extraModules ? [ ], hardwareModules ? [ ] }:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        # Spezialargumente: Inputs + hostName + versions
+        specialArgs = {
+          inherit inputs hostName versions users;
+        };
+
+        modules =
+          hardwareModules ++
+          [
+            # Host-spezifische Default Config
+            ./hosts/${hostName}/default.nix
+
+            # Flatpak
+            nix-flatpak.nixosModules.nix-flatpak
+
+            # Home Manager
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs hostName versions users; };
+              home-manager.users.${users.defaultUser.name} = {
+                imports = [
+                  ./home/${users.defaultUser.name}/home.nix
+                  plasma-manager.homeModules.plasma-manager
+                ];
+              };
+
+              home-manager.backupFileExtension = "backup";
+            }
+          ]
+          ++ extraModules;
+      };
+  in
+  {
     nixosConfigurations = {
-      nixos-btw = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          # Hardware-Unterstützung für dein Lenovo Legion
+      nixos-btw = mkHost {
+        hostName = "nixos-btw";
+        hardwareModules = [
           nixos-hardware.nixosModules.lenovo-legion-16achg6-hybrid
-
-          # Deine Hauptsystemkonfiguration
-          ./hosts/nixos-btw/default.nix
-
-          nix-flatpak.nixosModules.nix-flatpak
-
-          # Optional: Home Manager aktivieren
-          inputs.home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.mischka = {
-              imports = [
-                ./home/mischka/home.nix
-                plasma-manager.homeModules.plasma-manager
-              ];
-            };
-            home-manager.backupFileExtension = "backup";
-          }
         ];
-
-        # Spezialargumente, falls du Inputs in der config brauchst
-        specialArgs = { inherit inputs; };
       };
 
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          # Deine Hauptsystemkonfiguration
-          ./hosts/nixos/default.nix
-
-          nix-flatpak.nixosModules.nix-flatpak
-
-          # Optional: Home Manager aktivieren
-          inputs.home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.mischka = {
-              imports = [
-                ./home/mischka/home.nix
-                plasma-manager.homeModules.plasma-manager
-              ];
-            };
-          }
-        ];
-
-        # Spezialargumente, falls du Inputs in der config brauchst
-        specialArgs = { inherit inputs; };
+      nixos = mkHost {
+        hostName = "nixos";
       };
     };
+
+    # ⭐ erlaubt: nixos-rebuild switch --flake .
+    defaultPackage.${system} =
+      self.nixosConfigurations.${defaultHost}.config.system.build.toplevel;
   };
 }

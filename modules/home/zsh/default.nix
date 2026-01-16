@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, hostName, ... }:
+
+let
+  flakePath = "/home/mischka/nixos-config";
+  nixBuildCmd = "cd ${flakePath} && sudo nix flake update && sudo nixos-rebuild switch --flake ${flakePath}";
+in
 {
   programs.zsh = {
     enable = true;
@@ -17,7 +22,7 @@
       ll = "ls -alh";
       gs = "git status";
       fu = "sudo nix flake update";
-      nixbuild = "sudo nix flake update && sudo nixos-rebuild switch --flake /home/mischka/nixos-config#nixos-btw";
+      nixbuild = nixBuildCmd;
     };
 
     history.size = 10000;
@@ -26,7 +31,7 @@
       [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
       if [[ $- == *i* ]]; then
-        if command -v freshfetch >/dev/null 2>&1; then
+        if command -v fastfetch >/dev/null 2>&1; then
           fastfetch
         elif command -v neofetch >/dev/null 2>&1; then
           neofetch
