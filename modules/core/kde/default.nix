@@ -5,7 +5,7 @@
   # KDE Plasma Desktop Core Config
   ##############################################
   services.xserver.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.desktopManager.plasma6.enable = true;
 
   # Systemweite KDE Apps
   environment.systemPackages = with pkgs; [
@@ -28,6 +28,6 @@
   # Optional Wallpapers
   environment.etc."xdg/wallpapers".source = ./wallpapers;
 
-  # Autostart-Scripts
-  environment.etc."xdg/autostart-scripts".source = ./scripts;
+  # Autostart-Scripts auf gemeinsamen Core-Ordner zeigen
+  environment.etc."xdg/autostart-scripts".source = ../../autostart-scripts;
 }

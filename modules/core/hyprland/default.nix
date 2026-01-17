@@ -19,6 +19,6 @@
   # Optional Wallpapers
   environment.etc."xdg/wallpapers".source = ./wallpapers;
 
-  # Autostart Scripts
-  environment.etc."xdg/autostart-scripts".source = ./scripts;
+  # Autostart-Scripts auf gemeinsamen Core-Ordner zeigen
+  environment.etc."xdg/autostart-scripts".source = ../../autostart-scripts;
 }
