@@ -10,7 +10,7 @@
     vlc gimp-with-plugins parabolic delfin
 
     # --- Communication ---
-    ferdium teams-for-linux
+    teams-for-linux
 
     # --- CLI-Tools ---
     htop bat neofetch freshfetch fastfetch ripgrep fd wget kitty imagemagick bind
@@ -19,7 +19,7 @@
     unzip unrar
 
     # --- Development Tools ---
-    powershell gcc lazygit openssl jetbrains.rider
+    powershell gcc lazygit openssl
 
   ];
   

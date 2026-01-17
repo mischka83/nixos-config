@@ -1,12 +1,15 @@
 { config, pkgs, ... }:
 
 {
+  ##############################################
+  # 🔹 Core Services (unabhängig von DE/WM)
+  ##############################################
   services = {
-  
-    desktopManager.plasma6.enable = true;
-    # Firmware & SSD
+    # Firmware & SSD Maintenance
     fwupd.enable = true;
     fstrim.enable = true;
+
+    # Audio / Pipewire
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -15,13 +18,11 @@
       jack.enable = true;
       wireplumber.enable = true; # moderner Session-Manager
     };
+
+    # Pulseaudio deaktivieren
     pulseaudio.enable = false;
+
+    # Input Devices
     libinput.enable = true;
-
   };
-  
-
-
-
-
 }

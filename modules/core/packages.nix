@@ -1,75 +1,45 @@
 { config, pkgs, ... }:
 
+let
+  host = config.networking.hostName;
+in
 {
-  # Hyperland Window Manager konfigurieren
+  ##############################################
+  # 🔹 Core Programme (Host-unabhängig)
+  ##############################################
   programs = {
     neovim = {
       enable = true;
-      defaultEditor = true;
-    };
-    hyprland = {
-      enable = true;
-      # set the flake package
-      #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      # make sure to also set the portal package, so that they are in sync
-      #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-      withUWSM = true;
-    };
-
-    # firefox.enable = true;  # Browser systemweit
-    steam.enable = true;    # Spielplattform systemweit
-    zoom-us.enable = true;  # Zoom Client systemweit
-    obs-studio = {
-      enable = true;
-      # optional Nvidia hardware acceleration
-      package = (
-        pkgs.obs-studio.override {
-          cudaSupport = true;
-        }
-      );
-
-      plugins = with pkgs.obs-studio-plugins; [
-        wlrobs
-        obs-backgroundremoval
-        obs-pipewire-audio-capture
-        obs-vaapi #optional AMD hardware acceleration
-        obs-gstreamer
-        obs-vkcapture
-      ];
+      defaultEditor = true;  # Neovim als Standardeditor
     };
   };
 
+  ##############################################
+  # 🔹 Nixpkgs Konfiguration
+  ##############################################
   nixpkgs.config.allowUnfree = true;
 
-  # --- Systemweite Pakete ---
+  ##############################################
+  # 🔹 Systemweite Pakete (Core, alle Hosts)
+  ##############################################
   environment.systemPackages = with pkgs; [
     # --- System-Tools ---
     pciutils stow ffmpeg clinfo tree mission-center usbutils
 
-    # --- Development (Core, systemweit) ---
-    nodejs powershell poetry 
-    
+    # --- Development Tools ---
+    nodejs powershell
+
     # --- Development (Container / Virtualisierung) ---
     freerdp
+  ]
+  # --- Host-spezifische Core Packages ---
+  ++ (if host == "nixos-btw" then [
+    pkgs.jetbrains.rider    # JetBrains Rider nur auf dieser Workstation
+    pkgs.adwsteamgtk        # Steam GTK Integration
+  ] else []);
 
-    # --- KDE-Apps (Desktop-Grundausstattung) ---
-    kdePackages.kate
-    kdePackages.dolphin
-    kdePackages.konsole
-    kdePackages.okular
-    kdePackages.gwenview
-    kdePackages.kcalc
-    kdePackages.kdeconnect-kde
-    kdePackages.discover
-    kdePackages.krunner
-    pkgs.kdePackages.kwin
-    papirus-icon-theme
-
-    # --- Gaming Plattform ---
-    adwsteamgtk
-
-    # --- Hyprland Apps ---
-    rofi waybar
-  ];
-
+  ##############################################
+  # 🔹 Host-spezifische Programme / Services
+  ##############################################
+  programs.steam.enable = host == "nixos-btw";
 }
