@@ -10,7 +10,7 @@
     ./host-packages.nix
   ];
 
-  networking.hostName = "nixos-btw"; # Define your hostname.
+  networking.hostName = "nixos-btw";
 
   ##############################################
   # ⚙️ Nix & System Maintenance
@@ -25,36 +25,12 @@
 
   nix.optimise.automatic = true;
 
-  system.autoUpgrade = {
+  ##############################################
+  # 🔄 Auto Upgrade (flake based)
+  ##############################################
+  my.autoUpgrade = {
     enable = true;
-    allowReboot = false;
-    flake = "/home/mischka/nixos-config#nixos-btw";
-    dates = "daily";
+    host = "nixos-btw";
+    # flakePath = "/home/mischka/nixos-config"; # optional override
   };
-
-  # Systemd Timer / Service für Auto-Upgrade
-  systemd.services."nixos-auto-upgrade" = {
-    description = "Automatic daily NixOS upgrade via flakes";
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = ''
-        /run/current-system/sw/bin/nix flake update /home/mischka/nixos-config
-        /run/current-system/sw/bin/nixos-rebuild switch --flake /home/mischka/nixos-config#nixos-btw
-      '';
-      StandardOutput = "journal";
-      StandardError = "journal";
-    };
-  };
-
-  systemd.timers."nixos-auto-upgrade" = {
-    description = "Run nixos-auto-upgrade daily";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "daily";
-      Persistent = true;
-      RandomizedDelaySec = "1h";
-    };
-  };
-
-
 }

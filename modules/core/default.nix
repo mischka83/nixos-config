@@ -2,6 +2,7 @@
 
 {
 imports = [
+    ./auto-upgrade.nix
     ./boot.nix
     ./virtualisation.nix
     ./flatpak.nix

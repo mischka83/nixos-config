@@ -10,11 +10,15 @@
     ./host-packages.nix
   ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos";
 
   services.printing.enable = true;
 
-
-
-
+  ##############################################
+  # 🔄 Auto Upgrade (flake based)
+  ##############################################
+  my.autoUpgrade = {
+    enable = false;
+    host = "nixos";
+  };
 }

@@ -62,6 +62,7 @@
     kdePackages.kdeconnect-kde
     kdePackages.discover
     kdePackages.krunner
+    pkgs.kdePackages.kwin
     papirus-icon-theme
 
     # --- Gaming Plattform ---
