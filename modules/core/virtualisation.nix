@@ -2,15 +2,15 @@
 
 {
   ##############################################
-  # 🔹 Virtualisierung - Core-Defaults
+  # 🔹 Virtualisierung - Core Defaults
   ##############################################
-  # Alles deaktiviert, nur Standardwerte
+
   virtualisation = {
-    docker.enable = false;
-    libvirtd.enable = false;
-    virtualbox.host.enable = false;
+    docker.enable = lib.mkDefault false;
+    libvirtd.enable = lib.mkDefault false;
+    virtualbox.host.enable = lib.mkDefault false;
   };
 
-  # vboxusers Gruppe wird nur auf Hosts aktiviert, die VBox nutzen
-  users.extraGroups.vboxusers.members = [];
+  # Gruppe nur vorbereiten, Hosts füllen sie
+  users.extraGroups.vboxusers.members = lib.mkDefault [];
 }

@@ -10,18 +10,8 @@
   ];
 
   programs.steam.enable = true;
-  zoom-us.enable = true;
-
-  ##############################################
-  # 🔹 Virtualisierung nur auf dieser Workstation
-  ##############################################
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableKvm = true;
-  virtualisation.virtualbox.host.addNetworkInterface = false;
-
-  users.extraGroups.vboxusers.members = [ "mischka" ];
-
-  obs-studio = {
+  programs.zoom-us.enable = true;
+  programs.obs-studio = {
     enable = true;
     package = pkgs.obs-studio.override { cudaSupport = true; };
     plugins = with pkgs.obs-studio-plugins; [
@@ -33,4 +23,14 @@
       obs-vkcapture
     ];
   };
+
+  ##############################################
+  # 🔹 Virtualisierung nur auf dieser Workstation
+  ##############################################
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableKvm = true;
+  virtualisation.virtualbox.host.addNetworkInterface = false;
+
+  users.extraGroups.vboxusers.members = [ "mischka" ];
+
 }
