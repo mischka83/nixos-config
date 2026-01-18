@@ -1,43 +1,36 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   ##############################################
-  # 🔹 Host-spezifische systemweite Packages
+  # 🔹 Host-spezifische Pakete & Services
   ##############################################
   environment.systemPackages = with pkgs; [
-    # --- Development Tools ---
-    jetbrains.rider       # Nur auf dieser Workstation benötigt
-
-    # --- Productivity ---
-    zoom-us               # Zoom Client systemweit aktiv
-
-    # --- Gaming / Steam Integration ---
-    adwsteamgtk           # GTK Integration für Steam auf Wayland
+    jetbrains.rider
+    adwsteamgtk
   ];
 
-  ##############################################
-  # 🔹 Host-spezifische Programme / Services
-  ##############################################
-  programs = {
-    # --- Gaming / Entertainment ---
-    steam.enable = true;   # Steam nur auf dieser Workstation
+  programs.steam.enable = true;
+  zoom-us.enable = true;
 
-    # --- Streaming / Recording ---
-    obs-studio = {
-      enable = true;       # OBS Studio aktivieren
-      # Optional: Nvidia Hardware Acceleration
-      package = pkgs.obs-studio.override {
-        cudaSupport = true;
-      };
-      # OBS Plugins
-      plugins = with pkgs.obs-studio-plugins; [
-        wlrobs                       # Wayland OBS Integration
-        obs-backgroundremoval         # Background removal plugin
-        obs-pipewire-audio-capture   # Pipewire Audio Capture
-        obs-vaapi                     # AMD Video Acceleration (optional)
-        obs-gstreamer                 # GStreamer Integration
-        obs-vkcapture                 # Vulkan Capture Plugin
-      ];
-    };
+  ##############################################
+  # 🔹 Virtualisierung nur auf dieser Workstation
+  ##############################################
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableKvm = true;
+  virtualisation.virtualbox.host.addNetworkInterface = false;
+
+  users.extraGroups.vboxusers.members = [ "mischka" ];
+
+  obs-studio = {
+    enable = true;
+    package = pkgs.obs-studio.override { cudaSupport = true; };
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-vaapi
+      obs-gstreamer
+      obs-vkcapture
+    ];
   };
 }

@@ -6,6 +6,7 @@
   ##############################################
   imports = [
     ../../modules/core
+    ./boot.nix
     ./hardware.nix
     ./host-packages.nix
   ];

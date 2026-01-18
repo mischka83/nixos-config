@@ -21,12 +21,6 @@ in
     # Kernel
     kernelPackages = pkgs.linuxPackages_6_12; # LTS Kernel
 
-    kernelParams = [
-      "amdgpu.dc=1"
-      "amdgpu.runpm=0"
-      "amdgpu.aspm=0"
-    ];
-
     #loader options
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
