@@ -7,6 +7,10 @@
   environment.systemPackages = with pkgs; [
     jetbrains.rider
     adwsteamgtk
+    freecad
+    zed-editor
+    google-chrome
+    via
   ];
 
   programs.steam.enable = true;
