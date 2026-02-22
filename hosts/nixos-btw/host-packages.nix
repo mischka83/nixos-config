@@ -27,6 +27,21 @@
       obs-vkcapture
     ];
   };
+  programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+    gtk3
+    glib
+    libGL
+    libxkbcommon
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXrandr
+    xorg.libXi
+    xorg.libXext
+    nss
+    mesa
+  ];
 
   ##############################################
   # 🔹 Virtualisierung nur auf dieser Workstation
