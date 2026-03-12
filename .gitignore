@@ -1,0 +1,26 @@
+# Nix build outputs
+result
+result-*
+.dirlocals
+
+# Nix flake lock file is usually committed for reproducibility
+# if you do not want that, uncomment the line below
+# flake.lock
+
+# Cache directories and swap files
+.cache/
+*.swp
+*.swo
+*~
+
+# Editor configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+
+# OS files
+Thumbs.db
+.Thumbs.db
