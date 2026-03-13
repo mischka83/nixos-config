@@ -7,7 +7,9 @@
 
   environment.systemPackages = with pkgs; [
     git
-    vscode
+    zed-editor
+    sbctl
+    efibootmgr
   ];
 
   programs.firefox.enable = true;
