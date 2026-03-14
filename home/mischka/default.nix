@@ -1,6 +1,12 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./programs/git.nix
+    ./programs/starship.nix
+    ./desktop/kde.nix
+  ];
+
   home.username = "mischka";
   home.homeDirectory = "/home/mischka";
   home.stateVersion = "25.11";
