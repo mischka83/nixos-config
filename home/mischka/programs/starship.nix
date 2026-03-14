@@ -30,9 +30,9 @@
         format = "([\\[$all_status$ahead_behind\\]]($style) )?";
         style = "bold red";
         conflicted = "=";
-        ahead = "⇡${count}";
-        behind = "⇣${count}";
-        diverged = "⇕⇡${ahead_count}⇣${behind_count}";
+        ahead = "⇡";
+        behind = "⇣";
+        diverged = "⇕";
         untracked = "?";
         stashed = "$";
         modified = "!";
