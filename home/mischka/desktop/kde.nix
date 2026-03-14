@@ -5,7 +5,7 @@
   qt = {
     enable = true;
     platformTheme.name = "kde";
-    style.name = "breeze-dark";
+    style.name = "breeze";
   };
 
   gtk = {
@@ -15,26 +15,22 @@
       package = pkgs.kdePackages.breeze;
     };
     iconTheme = {
-      name = "breeze";
+      name = "breeze-icons";
       package = pkgs.kdePackages.breeze-icons;
     };
   };
 
-  # Nerd Fonts Installation
+  # Nerd Fonts Installation - konkrete Fonts
   home.packages = with pkgs; [
-    # Nerd Fonts (monospace fonts with icons)
-    nerdfonts
-
-    # Individual popular Nerd Fonts (leaner alternative to nerdfonts package)
-    # Uncomment if you prefer smaller download:
-    # (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Meslo" ]; })
+    # Nerd Fonts (einzeln, um Speicher zu sparen)
+    (pkgs.nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Meslo" ]; })
 
     # KDE Plasma Theme packages
     kdePackages.breeze
     kdePackages.breeze-icons
   ];
 
-  # Optional: Configure default fonts
+  # Session Variable für Terminal
   home.sessionVariables = {
     TERM = "xterm-256color";
   };
