@@ -4,6 +4,7 @@
   imports = [
     ./programs/git.nix
     ./programs/starship.nix
+    ./shell/zsh.nix
     ./desktop/kde.nix
   ];
 
