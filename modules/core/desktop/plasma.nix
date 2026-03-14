@@ -22,5 +22,7 @@
     # Optional Creative Tools (uncomment if needed)
     # kdePackages.kdenlive              # Video editor
     # kdePackages.krita                 # Digital painting and illustration
+
+    kdePackages.kconfig
   ];
 }
