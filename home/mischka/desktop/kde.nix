@@ -1,10 +1,91 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
-  # KDE Plasma - Nur Fonts und Styling via Home Manager
-  # Theme/Colors werden manuell in KDE Settings gesetzt
+  imports = [
+    inputs.plasma-manager.homeModules.plasma-manager
+  ];
 
-  # Qt Stil für KDE Apps
+  programs.plasma = {
+    enable = true;
+
+    # Workspace Einstellungen
+    workspace = {
+      lookAndFeel = "org.kde.breezedark.desktop";
+      colorScheme = "BreezeDark";
+      cursor = {
+        theme = "breeze_cursors";
+        size = 24;
+      };
+      iconTheme = "breeze";
+      splashScreen = "org.kde.breezedark.desktop";
+    };
+
+    # Panels - Taskleiste oben
+    panels = [
+      {
+        alignment = "center";
+        floating = false;
+        height = 34;
+        hiding = "none";
+        location = "top";
+        screen = 0;
+        widgets = [
+          {
+            name = "org.kde.plasma.kickoff";
+          }
+          {
+            name = "org.kde.plasma.pager";
+          }
+          {
+            name = "org.kde.plasma.taskmanager";
+            config = {
+              General = {
+                groupingStrategy = 1;
+              };
+            };
+          }
+          {
+            name = "org.kde.plasma.systemtray";
+          }
+          {
+            name = "org.kde.plasma.digitalclock";
+          }
+        ];
+      }
+    ];
+
+    # Keyboard Shortcuts
+    shortcuts = {
+      "ActivityManager"."switch-to-activity-1" = "Meta+1";
+      "ActivityManager"."switch-to-activity-2" = "Meta+2";
+      "kwin"."Expose" = "Meta+E";
+      "kwin"."Switch Window Down" = "Meta+Down";
+      "kwin"."Switch Window Left" = "Meta+Left";
+      "kwin"."Switch Window Right" = "Meta+Right";
+      "kwin"."Switch Window Up" = "Meta+Up";
+      "kwin"."Window Close" = "Alt+F4";
+      "kwin"."Window Maximize" = "Meta+M";
+      "kwin"."Window Minimize" = "Meta+H";
+      "plasmashell"."activate application launcher" = "Meta";
+    };
+
+    # KWin (Window Manager)
+    kwin = {
+      edgeBarrier = 0;
+      borderlessMaximizedWindows = true;
+    };
+  };
+
+  # Nerd Fonts
+  home.packages = with pkgs; [
+    fira-code
+    jetbrains-mono
+    meslo-lg
+    kdePackages.breeze
+    kdePackages.breeze-icons
+  ];
+
+  # Qt Stil
   qt = {
     enable = true;
     platformTheme.name = "kde";
@@ -28,19 +109,7 @@
     };
   };
 
-  # Fonts
-  home.packages = with pkgs; [
-    # Nerd Fonts (monospace für Terminal/Editor)
-    fira-code
-    jetbrains-mono
-    meslo-lg
-
-    # KDE Theme Pakete
-    kdePackages.breeze
-    kdePackages.breeze-icons
-  ];
-
-  # Session Variable für Terminal
+  # Session Variable
   home.sessionVariables = {
     TERM = "xterm-256color";
   };
