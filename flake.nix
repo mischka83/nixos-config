@@ -38,7 +38,7 @@
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.users.mischka = import ./home/mischka/default.nix;
-          home-manager.backupFileExtension = "backup";
+          home-manager.backupFileExtension = "hm-backup";
         }
       ];
     };

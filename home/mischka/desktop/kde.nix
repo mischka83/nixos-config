@@ -67,6 +67,9 @@
                 showText = "never";
                 thumbnailWindow = true;
               };
+              Behavior = {
+                showOnlyIcons = true;     # nur Symbole
+              };
             };
           }
 
@@ -114,109 +117,6 @@
       edgeBarrier = 0;
       borderlessMaximizedWindows = true;
     };
-  };
-
-  # XDG Config Files - für Dark Theme Konfiguration
-  xdg.configFile = {
-    # KDE Global Settings - Dark Theme
-    "kdeglobals".text = ''
-      [General]
-      ColorScheme=BreezeDark
-      font=Noto Sans,11,-1,5,50,0,0,0,0,0
-      menuFont=Noto Sans,11,-1,5,50,0,0,0,0,0
-      smallestReadableFont=Noto Sans,8,-1,5,50,0,0,0,0,0
-      toolBarFont=Noto Sans,11,-1,5,50,0,0,0,0,0
-
-      [Icons]
-      Theme=breeze-dark
-
-      [Colors:Button]
-      BackgroundAlternate=49,54,59
-      BackgroundNormal=31,34,38
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=61,174,233
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=239,240,241
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
-
-      [Colors:Selection]
-      BackgroundAlternate=29,153,243
-      BackgroundNormal=61,174,233
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=255,255,255
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=255,255,255
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
-
-      [Colors:Tooltip]
-      BackgroundAlternate=49,54,59
-      BackgroundNormal=31,34,38
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=61,174,233
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=239,240,241
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
-
-      [Colors:View]
-      BackgroundAlternate=49,54,59
-      BackgroundNormal=31,34,38
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=61,174,233
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=239,240,241
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
-
-      [Colors:Window]
-      BackgroundAlternate=49,54,59
-      BackgroundNormal=31,34,38
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=61,174,233
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=239,240,241
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
-
-      [WM]
-      activeBackground=31,34,38
-      activeBlend=239,240,241
-      activeForeground=239,240,241
-      inactiveBackground=49,54,59
-      inactiveBlend=121,119,119
-      inactiveForeground=121,119,119
-    '';
-
-    # Plasma Shell - Panel Einstellungen
-    "plasmarc".text = ''
-      [PlasmaViews][Panel 0]
-      thickness=34
-      alignment=left
-      floating=false
-      opacity=translucent
-    '';
   };
 
   # Nerd Fonts
