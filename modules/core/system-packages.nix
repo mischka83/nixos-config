@@ -7,7 +7,7 @@
     zed-editor         # High-performance code editor
 
     # Office & Productivity
-    onlyoffice-bin     # Modern office suite (Writer, Calc, Impress)
+    onlyoffice-desktopeditors # Modern office suite (Writer, Calc, Impress)
 
     # System Administration & Boot
     sbctl              # Secure Boot Key Management
@@ -15,7 +15,7 @@
 
     # System Monitoring & Information
     htop               # Interactive system monitor
-    neofetch           # System information display
+    fastfetch          # System information display (maintained actively)
 
     # Communication & Email
     thunderbird        # Email, calendar, and chat client
@@ -27,6 +27,10 @@
     # Network & Download Tools
     curl               # Command-line download tool
     wget               # Download tool with retry support
+
+    # Hardware & Graphics Debugging
+    pciutils           # PCI bus information utility (lspci)
+    mesa-demos         # OpenGL and graphics information (requires NVIDIA driver)
 
     # CLI Enhancements
     ripgrep            # Fast recursive grep (rg)
