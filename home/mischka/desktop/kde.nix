@@ -76,9 +76,6 @@
       edgeBarrier = 0;
       borderlessMaximizedWindows = true;
     };
-
-    # Clickable desktop items
-    clickItemTo = "select";
   };
 
   # XDG Config Files - für Dark Theme Konfiguration
