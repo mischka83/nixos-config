@@ -6,7 +6,7 @@
     userName = "mischka";
     userEmail = "you@example.com";  # ACHTUNG: Bitte anpassen!
 
-    extraConfig = {
+    settings = {
       init.defaultBranch = "main";
       pull.rebase = false;
       fetch.prune = true;
