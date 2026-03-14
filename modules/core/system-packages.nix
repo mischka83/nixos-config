@@ -5,6 +5,8 @@
     # Development & Version Control
     git                # Distributed version control system
     zed-editor         # High-performance code editor
+    diffutils          # GNU diff tools (diff, diff3, sdiff, cmp)
+    delta              # Syntax-highlighting diff viewer (git-delta)
 
     # Office & Productivity
     onlyoffice-desktopeditors # Modern office suite (Writer, Calc, Impress)
