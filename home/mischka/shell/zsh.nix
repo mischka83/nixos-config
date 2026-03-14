@@ -21,10 +21,12 @@
       gl = "git log --oneline -10";
     };
 
-    initExtra = ''
+    initContent = ''
       # Zsh history
       HISTSIZE=10000
       SAVEHIST=10000
+      setopt HIST_SAVE_NO_DUPS
+      setopt HIST_IGNORE_DUPS
     '';
   };
 }

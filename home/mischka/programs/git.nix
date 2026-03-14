@@ -3,14 +3,24 @@
 {
   programs.git = {
     enable = true;
-    userName = "mischka";
-    userEmail = "you@example.com";  # ACHTUNG: Bitte anpassen!
 
     settings = {
+      user = {
+        name = "mischka";
+        email = "you@example.com";  # ACHTUNG: Bitte anpassen!
+      };
       init.defaultBranch = "main";
       pull.rebase = false;
       fetch.prune = true;
       diff.colorMoved = "zebra";
+      alias = {
+        st = "status";
+        co = "checkout";
+        br = "branch";
+        unstage = "restore --staged";
+        last = "log -1 HEAD";
+        visual = "log --graph --oneline --all";
+      };
     };
 
     ignores = [
@@ -20,20 +30,14 @@
       "result"
       ".dirlocals"
     ];
-
-    aliases = {
-      st = "status";
-      co = "checkout";
-      br = "branch";
-      unstage = "restore --staged";
-      last = "log -1 HEAD";
-      visual = "log --graph --oneline --all";
-    };
   };
 
   # SSH-Agent für Git
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+      addKeysToAgent = "yes";
+    };
   };
 }
