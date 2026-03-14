@@ -1,114 +1,92 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
-  # KDE Plasma Dark Theme - Vollständige Konfiguration
-  xdg.configFile."kdeglobals" = {
-    text = ''
-      [General]
-      ColorScheme=BreezeDark
-      font=Noto Sans,11,-1,5,50,0,0,0,0,0
-      menuFont=Noto Sans,11,-1,5,50,0,0,0,0,0
-      smallestReadableFont=Noto Sans,8,-1,5,50,0,0,0,0,0
-      toolBarFont=Noto Sans,11,-1,5,50,0,0,0,0,0
-      fixed=Monospace,10,-1,5,50,0,0,0,0,0
+  imports = [
+    inputs.plasma-manager.homeManagerModules.plasma-manager
+  ];
 
-      [Icons]
-      Theme=breeze-dark
+  programs.plasma = {
+    enable = true;
 
-      [Colors:Button]
-      BackgroundAlternate=49,54,59
-      BackgroundNormal=31,34,38
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=61,174,233
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=239,240,241
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
+    # KDE Theme und Appearance
+    theme = "breeze-dark";
+    colorScheme = "BreezeDark";
+    cursor = {
+      theme = "breeze_cursors";
+      size = 24;
+    };
 
-      [Colors:Selection]
-      BackgroundAlternate=29,153,243
-      BackgroundNormal=61,174,233
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=255,255,255
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=255,255,255
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
+    # Panels - Taskleiste oben
+    panels = [
+      {
+        alignment = "center";
+        colorScheme = "BreezeDark";
+        height = 34;
+        hiding = "none";
+        location = "top";
+        screen = 0;
 
-      [Colors:Tooltip]
-      BackgroundAlternate=49,54,59
-      BackgroundNormal=31,34,38
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=61,174,233
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=239,240,241
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
+        widgets = [
+          {
+            name = "org.kde.plasma.kickoff";
+            config = {
+              General.icon = "nix-snowflake";
+            };
+          }
+          "org.kde.plasma.pager"
+          "org.kde.plasma.taskmanager"
+          {
+            name = "org.kde.plasma.systemtray";
+          }
+          "org.kde.plasma.digitalclock"
+        ];
+      }
+    ];
 
-      [Colors:View]
-      BackgroundAlternate=49,54,59
-      BackgroundNormal=31,34,38
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=61,174,233
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=239,240,241
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
+    # Shortcuts
+    shortcuts = {
+      "ActivityManager"."switch-to-activity-1" = "Meta+1";
+      "ActivityManager"."switch-to-activity-2" = "Meta+2";
+      "kwin"."Expose" = "Meta+E";
+      "kwin"."Switch Window Down" = "Meta+Down";
+      "kwin"."Switch Window Left" = "Meta+Left";
+      "kwin"."Switch Window Right" = "Meta+Right";
+      "kwin"."Switch Window Up" = "Meta+Up";
+      "kwin"."Window Close" = "Alt+F4";
+      "kwin"."Window Maximize" = "Meta+M";
+      "kwin"."Window Minimize" = "Meta+H";
+      "plasmashell"."activate application launcher" = "Meta";
+    };
 
-      [Colors:Window]
-      BackgroundAlternate=49,54,59
-      BackgroundNormal=31,34,38
-      DecorationFocus=61,174,233
-      DecorationHover=61,174,233
-      ForegroundActive=61,174,233
-      ForegroundInactive=121,119,119
-      ForegroundLink=41,128,185
-      ForegroundNegative=218,68,83
-      ForegroundNeutral=246,116,0
-      ForegroundNormal=239,240,241
-      ForegroundPositive=39,174,96
-      ForegroundVisited=155,89,182
+    # KWin (Window Manager)
+    kwin = {
+      edgeBarrier = 0;
+      borderlessMaximizedWindows = true;
+      focus = "Sloppy";
+    };
 
-      [WM]
-      activeBackground=31,34,38
-      activeBlend=239,240,241
-      activeForeground=239,240,241
-      inactiveBackground=49,54,59
-      inactiveBlend=121,119,119
-      inactiveForeground=121,119,119
-    '';
+    # Fonts
+    fonts = {
+      general = {
+        family = "Noto Sans";
+        pointSize = 11;
+      };
+      menu = {
+        family = "Noto Sans";
+        pointSize = 11;
+      };
+      monospace = {
+        family = "JetBrains Mono";
+        pointSize = 10;
+      };
+    };
+
+    # Hintergrundbild
+    wallpaper = null;  # Setze hier einen Pfad: /path/to/wallpaper.png
   };
 
-  # KDE Kurz-Shortcuts auch konfigurieren
-  xdg.configFile."kglobalshortcutsrc" = {
-    text = ''
-      [kwin]
-      Switch Window=Alt+Tab
-      Window Close=Alt+F4
-      Window Maximize=Meta+M
-      Window Minimize=Meta+H
-    '';
-  };
-
-  # Nerd Fonts - für bessere Icon Support in Terminal & Starship
+  # Nerd Fonts
   home.packages = with pkgs; [
-    # Nerd Fonts (einzeln)
     fira-code
     jetbrains-mono
     meslo-lg
@@ -118,7 +96,7 @@
     kdePackages.breeze-icons
   ];
 
-  # Qt Stil für KDE Apps
+  # Qt Stil
   qt = {
     enable = true;
     platformTheme.name = "kde";
@@ -138,7 +116,7 @@
     };
   };
 
-  # Session Variable für Terminal
+  # Session Variable
   home.sessionVariables = {
     TERM = "xterm-256color";
   };
