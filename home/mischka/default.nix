@@ -5,7 +5,11 @@
     ./programs/git.nix
     ./programs/starship.nix
     ./shell/zsh.nix
-    ./desktop/kde.nix
+    ./desktop/plasma.nix
+    ./desktop/shortcuts.nix
+    ./desktop/panel.nix
+    ./desktop/theme.nix
+    ./desktop/performance.nix
   ];
 
   home.username = "mischka";
