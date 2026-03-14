@@ -16,10 +16,12 @@
     '';
   };
 
-  # Nerd Fonts - für bessere Icon Support
+  # Nerd Fonts - für bessere Icon Support in Terminal & Starship
   home.packages = with pkgs; [
-    # Beliebte Nerd Fonts
-    (nerd-fonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Meslo" ]; })
+    # Nerd Fonts (einzeln)
+    fira-code
+    jetbrains-mono
+    meslo-lg
 
     # KDE Theme Pakete
     kdePackages.breeze
