@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # TPM2-Based LUKS Disk Encryption for Lenovo Legion
@@ -54,7 +54,7 @@
   boot.initrd.systemd.enable = true;
 
   # Optional: Enable TPM2 tools for debugging
-  environment.systemPackages = with import <nixpkgs> {}; [
+  environment.systemPackages = with pkgs; [
     tpm2-tools
   ];
 }
