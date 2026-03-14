@@ -8,30 +8,49 @@
   programs.plasma = {
     enable = true;
 
-    # Panels - Taskleiste oben mit Dark Theme
+    # Panels - Taskleiste oben, transparent, nicht schwebend
     panels = [
       {
-        alignment = "center";
+        alignment = "left";
         floating = false;
         height = 34;
         hiding = "none";
         location = "top";
         screen = "all";
+        opacity = 0.9;  # Durchsichtigkeit (0.0 = vollständig transparent, 1.0 = opak)
 
         widgets = [
+          # 1. Startmenü
           {
             name = "org.kde.plasma.kickoff";
             config = {
               General = {
                 icon = "nix-snowflake";
-                favoriteSystemActions = "logout";
               };
             };
           }
+
+          # 2. Virtuelle Desktops
+          {
+            name = "org.kde.plasma.pager";
+            config = {
+              General = {
+                displayedText = "desktopName";
+              };
+            };
+          }
+
+          # 3. Globales Menü
           {
             name = "org.kde.plasma.appmenu";
           }
-          "org.kde.plasma.pager"
+
+          # 4. Platzhalter (Spacer) - links
+          {
+            name = "org.kde.plasma.spacer";
+          }
+
+          # 5. Fenster Icons OHNE Titel
           {
             name = "org.kde.plasma.taskmanager";
             config = {
@@ -50,8 +69,27 @@
               };
             };
           }
-          "org.kde.plasma.systemtray"
-          "org.kde.plasma.digitalclock"
+
+          # 6. Platzhalter (Spacer) - rechts
+          {
+            name = "org.kde.plasma.spacer";
+          }
+
+          # 7. System Tray
+          {
+            name = "org.kde.plasma.systemtray";
+          }
+
+          # 8. Uhr
+          {
+            name = "org.kde.plasma.digitalclock";
+            config = {
+              General = {
+                showSeconds = false;
+                use24hFormat = 1;
+              };
+            };
+          }
         ];
       }
     ];
@@ -171,12 +209,13 @@
       inactiveForeground=121,119,119
     '';
 
-    # Plasma Shell - weitere Anpassungen
+    # Plasma Shell - Panel Einstellungen
     "plasmarc".text = ''
       [PlasmaViews][Panel 0]
       thickness=34
-      alignment=center
+      alignment=left
       floating=false
+      opacity=0.9
     '';
   };
 
