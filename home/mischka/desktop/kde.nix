@@ -8,18 +8,6 @@
   programs.plasma = {
     enable = true;
 
-    # Workspace Einstellungen
-    workspace = {
-      lookAndFeel = "org.kde.breezedark.desktop";
-      colorScheme = "BreezeDark";
-      cursor = {
-        theme = "breeze_cursors";
-        size = 24;
-      };
-      iconTheme = "breeze";
-      splashScreen = "org.kde.breezedark.desktop";
-    };
-
     # Panels - Taskleiste oben
     panels = [
       {
@@ -29,6 +17,7 @@
         hiding = "none";
         location = "top";
         screen = 0;
+
         widgets = [
           {
             name = "org.kde.plasma.kickoff";
@@ -38,11 +27,6 @@
           }
           {
             name = "org.kde.plasma.taskmanager";
-            config = {
-              General = {
-                groupingStrategy = 1;
-              };
-            };
           }
           {
             name = "org.kde.plasma.systemtray";
@@ -92,7 +76,7 @@
     style.name = "breeze";
   };
 
-  # GTK Stil (für nicht-KDE Apps)
+  # GTK Stil
   gtk = {
     enable = true;
     theme = {
