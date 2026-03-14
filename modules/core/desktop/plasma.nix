@@ -2,4 +2,21 @@
 
 {
   services.desktopManager.plasma6.enable = true;
+
+  # Essential and recommended KDE Plasma applications
+  environment.systemPackages = with pkgs; [
+    # Core KDE Applications (ESSENTIAL)
+    kdePackages.kate                     # Advanced text editor with syntax highlighting
+    kdePackages.konsole                  # Default KDE terminal emulator
+    kdePackages.okular                   # Feature-rich PDF viewer and document reader
+    kdePackages.dolphin-plugins          # File manager extensions
+
+    # KDE Applications (RECOMMENDED)
+    kdePackages.gwenview                 # Fast and lightweight image viewer
+    kdePackages.spectacle                # Screenshot and screen recording tool
+
+    # Optional Creative Tools (uncomment if needed)
+    # kdePackages.kdenlive              # Video editor
+    # kdePackages.krita                 # Digital painting and illustration
+  ];
 }
