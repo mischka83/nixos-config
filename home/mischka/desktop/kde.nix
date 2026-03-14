@@ -17,7 +17,7 @@
         hiding = "none";
         location = "top";
         screen = "all";
-        opacity = 0.9;  # Durchsichtigkeit (0.0 = vollständig transparent, 1.0 = opak)
+        opacity = "translucent";  # Durchsichtig
 
         widgets = [
           # 1. Startmenü
@@ -215,7 +215,7 @@
       thickness=34
       alignment=left
       floating=false
-      opacity=0.9
+      opacity=translucent
     '';
   };
 
