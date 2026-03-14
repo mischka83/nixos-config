@@ -3,12 +3,14 @@
 {
   programs.plasma.panels = [
     {
-      location = "top";
-      height = 36;
-      floating = false;
+      location = "top";       # Panel oben
+      height = 36;            # Höhe in Pixel
+      floating = false;        # Fixiert, nicht schwebend
+      lengthMode = "fill";     # Panel füllt die gesamte Breite
+      hiding = "none";         # Nicht automatisch ausblenden
+      opacity = "opaque";      # Panel vollständig sichtbar
 
       widgets = [
-
         # Nix Startmenu
         {
           kickoff = {
@@ -29,7 +31,6 @@
         {
           iconTasks = {
             iconsOnly = true;
-
             settings = {
               showToolTips = false;
             };
