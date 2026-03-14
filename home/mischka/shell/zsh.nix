@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-  # Zsh Shell mit Starship Integration
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -9,11 +8,8 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      # Navigation
       ll = "ls -la";
       la = "ls -a";
-
-      # Git
       gs = "git status";
       ga = "git add";
       gc = "git commit";
@@ -27,6 +23,18 @@
       SAVEHIST=10000
       setopt HIST_SAVE_NO_DUPS
       setopt HIST_IGNORE_DUPS
+
+      # Ctrl+Arrow Wortweise springen
+      bindkey '^[[1;5C' forward-word   # Ctrl+Right
+      bindkey '^[[1;5D' backward-word  # Ctrl+Left
+
+      # Fastfetch beim Start
+      command -v fastfetch >/dev/null && fastfetch
     '';
   };
+
+  # Stelle sicher, dass fastfetch als Paket verfügbar ist
+  home.packages = with pkgs; [
+    fastfetch
+  ];
 }
