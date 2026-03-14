@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/core/default.nix
+    ../../modules/optional/bluetooth.nix
   ];
 
   networking.hostName = "nixos-btw";
