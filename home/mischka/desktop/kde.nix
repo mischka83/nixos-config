@@ -17,10 +17,10 @@
         hiding = "none";
         location = "top";
         screen = "all";
-        opacity = "translucent";  # Durchsichtig
+        opacity = "translucent";
 
         widgets = [
-          # 1. Startmenü
+          # 1. Startmenü (Kickoff mit Nix-Icon)
           {
             name = "org.kde.plasma.kickoff";
             config = {
@@ -30,14 +30,9 @@
             };
           }
 
-          # 2. Virtuelle Desktops
+          # 2. Virtuelle Desktops (Pager)
           {
             name = "org.kde.plasma.pager";
-            config = {
-              General = {
-                displayedText = "desktopName";
-              };
-            };
           }
 
           # 3. Globales Menü
@@ -45,7 +40,7 @@
             name = "org.kde.plasma.appmenu";
           }
 
-          # 4. Platzhalter (Spacer) - links
+          # 4. Platzhalter links
           {
             name = "org.kde.plasma.spacer";
           }
@@ -57,23 +52,17 @@
               General = {
                 groupingStrategy = 1;
                 showOnlyMinimized = false;
-                launchersGroup = 0;
                 showToolTips = true;
                 iconSize = 32;
-                forceDiscreteGpu = false;
               };
               Appearance = {
                 maxStripes = 1;
                 showText = "never";
-                thumbnailWindow = true;
-              };
-              Behavior = {
-                showOnlyIcons = true;     # nur Symbole
               };
             };
           }
 
-          # 6. Platzhalter (Spacer) - rechts
+          # 6. Platzhalter rechts
           {
             name = "org.kde.plasma.spacer";
           }
@@ -119,6 +108,13 @@
     };
   };
 
+  # Qt Stil - KDE verwaltet GTK selbst über breeze-gtk
+  qt = {
+    enable = true;
+    platformTheme.name = "kde";
+    style.name = "breeze";
+  };
+
   # Nerd Fonts
   home.packages = with pkgs; [
     fira-code
@@ -127,30 +123,6 @@
     kdePackages.breeze
     kdePackages.breeze-icons
   ];
-
-  # Qt Stil
-  qt = {
-    enable = true;
-    platformTheme.name = "kde";
-    style.name = "breeze";
-  };
-
-  # GTK Stil
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Breeze-Dark";
-      package = pkgs.kdePackages.breeze;
-    };
-    iconTheme = {
-      name = "breeze-icons";
-      package = pkgs.kdePackages.breeze-icons;
-    };
-    cursorTheme = {
-      name = "breeze_cursors";
-      size = 24;
-    };
-  };
 
   # Session Variable
   home.sessionVariables = {
