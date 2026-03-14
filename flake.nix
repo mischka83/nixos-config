@@ -37,7 +37,12 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users.mischka = import ./home/mischka/default.nix;
+          home-manager.users.mischka = {
+            imports =[
+              inputs.plasma-manager.homeModules.plasma-manager
+              ./home/mischka/default.nix
+            ];
+          };
           home-manager.backupFileExtension = "hm-backup";
         }
       ];
