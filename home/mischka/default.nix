@@ -10,6 +10,7 @@
     ./desktop/panel.nix
     ./desktop/theme.nix
     ./desktop/performance.nix
+    ./desktop/krunner.nix
   ];
 
   home.username = "mischka";
