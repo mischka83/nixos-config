@@ -6,6 +6,7 @@
     ../../modules/core/default.nix
     ../../modules/optional/bluetooth.nix
     ../../modules/optional/nvidia-hybrid.nix
+    ../../modules/optional/steam.nix
     ../../modules/optional/tpm2-luks.nix
   ];
 
