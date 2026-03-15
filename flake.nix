@@ -16,36 +16,57 @@
 
     # Plasma Manager - für KDE Plasma Customization
     plasma-manager = {
-      url = "github:pjones/plasma-manager";
+      url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, plasma-manager, ... }@inputs: {
-    nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
-        nixos-hardware.nixosModules.lenovo-legion-16achg6-hybrid
-        ./hosts/nixos-btw/default.nix
+  outputs = inputs@{ nixpkgs, home-manager, nixos-hardware, ... }:
+    let
+      mkHome = { username, homeModule }: {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = { inherit inputs; };
+        home-manager.users.${username} = {
+          imports = [
+            inputs.plasma-manager.homeModules.plasma-manager
+            homeModule
+          ];
+        };
+        home-manager.backupFileExtension = "hm-backup";
+      };
 
-        # Home-Manager als Modul einbinden
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users.mischka = {
-            imports =[
-              inputs.plasma-manager.homeModules.plasma-manager
-              ./home/mischka/default.nix
+      mkHost = {
+        hostModule,
+        username,
+        homeModule,
+        system ? "x86_64-linux",
+        extraModules ? [ ],
+      }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules =
+            extraModules
+            ++ [
+              hostModule
+              home-manager.nixosModules.home-manager
+              (mkHome {
+                inherit username homeModule;
+              })
             ];
-          };
-          home-manager.backupFileExtension = "hm-backup";
-        }
-      ];
+        };
+    in
+    {
+      nixosConfigurations.nixos-btw = mkHost {
+        hostModule = ./hosts/nixos-btw/default.nix;
+        username = "mischka";
+        homeModule = ./home/mischka/default.nix;
+        extraModules = [
+          # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+          nixos-hardware.nixosModules.lenovo-legion-16achg6-hybrid
+        ];
+      };
     };
-  };
 }
