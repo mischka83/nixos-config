@@ -4,6 +4,7 @@
   imports = [
     ./programs/git.nix
     ./programs/starship.nix
+    ./programs/vscode.nix
     ./shell/zsh.nix
     ./desktop/plasma/default.nix
   ];
