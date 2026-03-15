@@ -21,6 +21,8 @@
 
     # Communication & Email
     thunderbird        # Email, calendar, and chat client
+    teams-for-linux    # Unofficial Microsoft Teams client
+    remmina            # Remote desktop client (RDP/VNC/SSH)
 
     # Archive & Compression Tools
     unzip              # Extract ZIP archives
