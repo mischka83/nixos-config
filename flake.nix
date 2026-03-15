@@ -20,6 +20,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    # NUR - Nix User Repository (für Firefox-Extensions u.a.)
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nixos-hardware, ... }:
@@ -50,6 +56,7 @@
           modules =
             extraModules
             ++ [
+              { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
               hostModule
               home-manager.nixosModules.home-manager
               (mkHome {
