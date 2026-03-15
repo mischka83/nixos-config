@@ -14,6 +14,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Secure Boot (optional) via Lanzaboote
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Plasma Manager - für KDE Plasma Customization
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
