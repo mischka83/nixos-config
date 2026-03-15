@@ -9,11 +9,6 @@ in
     position = "center";
     activateWhenTypingOnDesktop = true;
     historyBehavior = "enableSuggestions";
-
-    shortcuts = {
-      launch = "Meta+Space";
-      runCommandOnClipboard = "Meta+Shift+V";
-    };
   };
 
   programs.plasma.configFile.krunnerrc = lib.mkMerge [
@@ -35,12 +30,4 @@ in
     })
   ];
 
-  programs.plasma.shortcuts."services/org.kde.krunner.desktop" = lib.mkMerge [
-    (lib.mkIf (cfg.krunner.shortcuts.launch != null) {
-      _launch = cfg.krunner.shortcuts.launch;
-    })
-    (lib.mkIf (cfg.krunner.shortcuts.runCommandOnClipboard != null) {
-      RunClipboard = cfg.krunner.shortcuts.runCommandOnClipboard;
-    })
-  ];
 }
