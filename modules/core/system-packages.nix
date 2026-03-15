@@ -5,6 +5,7 @@
     # Development & Version Control
     git                # Distributed version control system
     zed-editor         # High-performance code editor
+    vscode             # Open-source code editor
     diffutils          # GNU diff tools (diff, diff3, sdiff, cmp)
     delta              # Syntax-highlighting diff viewer (git-delta)
 
