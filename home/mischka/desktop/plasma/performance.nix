@@ -41,7 +41,7 @@
       enable = false;
     };
 
-    # Snap Helper
+    # Snap Helper (visuelle Hilfe beim Andocken)
     snapHelper = {
       enable = true;
     };
@@ -71,5 +71,14 @@
     dimInactive = { enable = false; };
     dimAdminMode = { enable = false; };
     slideBack = { enable = false; };
+  };
+
+  # Compositor-Einstellungen zur Reduzierung von Eingabeverzögerung und Maus-Rucklern.
+  # LatencyPolicy=extreme: minimiert die Zeit zwischen Eingabe und Darstellung.
+  # WindowsBlockCompositing=false: verhindert, dass Anwendungen den Compositor
+  #   deaktivieren – das vermeidet Ruckler beim Fokus-Wechsel zurück auf den Desktop.
+  programs.plasma.configFile."kwinrc"."Compositing" = {
+    LatencyPolicy            = "extreme";
+    WindowsBlockCompositing  = false;
   };
 }
