@@ -8,7 +8,7 @@ in
     profiles.mischka = {
       name = "mischka";
 
-      extensions = with addons; [
+      extensions.packages = with addons; [
         bitwarden          # Passwort-Manager
         ublock-origin      # Werbung & Tracker blockieren
         privacy-badger     # Zusätzlicher Tracking-Schutz (EFF)
