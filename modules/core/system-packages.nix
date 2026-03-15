@@ -23,6 +23,7 @@
     thunderbird        # Email, calendar, and chat client
     teams-for-linux    # Unofficial Microsoft Teams client
     remmina            # Remote desktop client (RDP/VNC/SSH)
+    rustdesk           # Remote desktop / support client
 
     # Archive & Compression Tools
     unzip              # Extract ZIP archives
