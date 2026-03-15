@@ -1,12 +1,11 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   programs.plasma.workspace = {
     theme      = "breeze-dark";
     lookAndFeel = "org.kde.breezedark.desktop";
 
-    # NixOS-Wallpaper aus dem offiziellen nixos-artwork-Paket.
-    # Die Variante "nineish-dark-gray" passt gut zum Breeze-Dark-Theme.
-    wallpaper = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray}/share/wallpapers/nineish-dark-gray/contents/images/nix-wallpaper-nineish-dark-gray.png";
+    # Repo-lokales Wallpaper. Als git-getrackte Pfadreferenz landet es sauber im Store.
+    wallpaper = "${../../../../assets/wallpapers/nixos-tech-minimal-21x9.svg}";
   };
 }
