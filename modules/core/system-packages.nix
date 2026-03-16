@@ -10,6 +10,7 @@
 
     # Office & Productivity
     onlyoffice-desktopeditors # Modern office suite (Writer, Calc, Impress)
+    bitwarden          # Password manager desktop app
 
     # System Administration & Boot
     sbctl              # Secure Boot Key Management
