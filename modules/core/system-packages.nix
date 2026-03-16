@@ -24,6 +24,8 @@
     teams-for-linux    # Unofficial Microsoft Teams client
     remmina            # Remote desktop client (RDP/VNC/SSH)
     rustdesk           # Remote desktop / support client
+    vlc                # Media player
+    vlc                # Media player
 
     # Archive & Compression Tools
     unzip              # Extract ZIP archives
