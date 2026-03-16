@@ -37,7 +37,7 @@
               "applications:firefox.desktop"
               "applications:org.remmina.Remmina.desktop"
               "applications:code.desktop"
-              "applications:teams-for-linux.desktop"
+              "applications:com.github.IsmaelMartinez.teams_for_linux.desktop"
             ];
             settings = {
               showToolTips = false;
