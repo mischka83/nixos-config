@@ -1,23 +1,16 @@
-{ config, pkgs, ... }:
+{ lib, ... }:
 
 {
   services.displayManager = {
     sddm = {
       enable = true;
 
-      # Wayland-Backend fuer SDDM aktivieren (empfohlen fuer KDE Plasma/Wayland)
-      wayland.enable = true;
+      # mkForce nötig, da das silentSDDM-Modul wayland.enable intern auf
+      # !xserver.enable setzt – wir erzwingen Wayland explizit.
+      wayland.enable = lib.mkForce true;
 
-      # Aktives SDDM-Theme (muss auch in extraPackages vorhanden sein)
-      # Alternativen: "breeze" (KDE-Standard), "sddm-astronaut-theme"
-      theme = "sddm-chili-theme";
-
-      # Theme-Pakete bereitstellen, damit SDDM sie finden kann.
-      # sddm-astronaut-theme ist als Reserve eingebunden, aktuell nicht aktiv.
-      extraPackages = with pkgs; [
-        sddm-chili-theme
-        sddm-astronaut
-      ];
+      # Theme und extraPackages werden vollständig durch das silentSDDM-Modul gesetzt.
+      # Siehe modules/core/desktop/sddm-silent.nix
     };
 
     # Automatischen Login deaktiviert lassen (sicherer)
@@ -26,7 +19,5 @@
       enable = false;
       # user = "mischka";
     };
-
-
   };
 }

@@ -27,6 +27,12 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    # SilentSDDM – Plasma-6-kompatibles SDDM-Theme
+    silentSDDM = {
+      url = "github:uiriansan/SilentSDDM";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # NUR - Nix User Repository (für Firefox-Extensions u.a.)
     nur = {
       url = "github:nix-community/NUR";
@@ -63,6 +69,7 @@
             extraModules
             ++ [
               { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
+              inputs.silentSDDM.nixosModules.default
               hostModule
               home-manager.nixosModules.home-manager
               (mkHome {
