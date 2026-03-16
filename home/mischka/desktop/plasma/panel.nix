@@ -27,10 +27,18 @@
         # Spacer links
         "org.kde.plasma.panelspacer"
 
-        # Program Icons (zentriert)
+        # Program Icons (zentriert) – angeheftete Starter + laufende Fenster
         {
           iconTasks = {
             iconsOnly = true;
+            launchers = [
+              "applications:systemsettings.desktop"
+              "applications:org.kde.dolphin.desktop"
+              "applications:firefox.desktop"
+              "applications:org.remmina.Remmina.desktop"
+              "applications:code.desktop"
+              "applications:com.github.IsmaelMartinez.teams_for_linux.desktop"
+            ];
             settings = {
               showToolTips = false;
             };

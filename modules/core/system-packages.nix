@@ -10,6 +10,7 @@
 
     # Office & Productivity
     onlyoffice-desktopeditors # Modern office suite (Writer, Calc, Impress)
+    bitwarden          # Password manager desktop app
 
     # System Administration & Boot
     sbctl              # Secure Boot Key Management
@@ -21,9 +22,9 @@
 
     # Communication & Email
     thunderbird        # Email, calendar, and chat client
-    teams-for-linux    # Unofficial Microsoft Teams client
     remmina            # Remote desktop client (RDP/VNC/SSH)
     rustdesk           # Remote desktop / support client
+    vlc                # Media player
 
     # Archive & Compression Tools
     unzip              # Extract ZIP archives

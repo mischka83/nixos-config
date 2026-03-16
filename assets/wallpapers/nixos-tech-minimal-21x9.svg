@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3440" height="1440" viewBox="0 0 3440 1440" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="320" y1="80" x2="3050" y2="1360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#050C16"/>
+      <stop offset="0.42" stop-color="#091726"/>
+      <stop offset="0.78" stop-color="#0D2438"/>
+      <stop offset="1" stop-color="#11314A"/>
+    </linearGradient>
+
+    <radialGradient id="haloA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1120 770) rotate(0) scale(860 520)">
+      <stop offset="0" stop-color="#89F6FF" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#3AD8F1" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#3AD8F1" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="haloB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(2390 640) rotate(180) scale(920 560)">
+      <stop offset="0" stop-color="#7EEBFF" stop-opacity="0.14"/>
+      <stop offset="0.42" stop-color="#27C6E3" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#27C6E3" stop-opacity="0"/>
+    </radialGradient>
+
+    <pattern id="microGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" stroke="#D8FCFF" stroke-opacity="0.04"/>
+    </pattern>
+
+    <pattern id="majorGrid" width="160" height="160" patternUnits="userSpaceOnUse">
+      <path d="M160 0H0V160" stroke="#BDF9FF" stroke-opacity="0.06" stroke-width="1.2"/>
+    </pattern>
+
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+
+    <linearGradient id="trace" x1="0" y1="0" x2="3440" y2="1440" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ABFBFF" stop-opacity="0.02"/>
+      <stop offset="0.35" stop-color="#ABFBFF" stop-opacity="0.34"/>
+      <stop offset="0.7" stop-color="#2EC8E6" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#2EC8E6" stop-opacity="0.02"/>
+    </linearGradient>
+
+    <linearGradient id="coreStroke" x1="1270" y1="420" x2="2170" y2="1020" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#D7FFFF" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#8EF6FF" stop-opacity="0.88"/>
+      <stop offset="1" stop-color="#52D6ED" stop-opacity="0.84"/>
+    </linearGradient>
+
+    <linearGradient id="panelFill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0D1A28" stop-opacity="0.74"/>
+      <stop offset="1" stop-color="#0A1622" stop-opacity="0.28"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="3440" height="1440" fill="url(#bg)"/>
+  <rect width="3440" height="1440" fill="url(#microGrid)"/>
+  <rect width="3440" height="1440" fill="url(#majorGrid)"/>
+
+  <ellipse cx="1120" cy="770" rx="860" ry="520" fill="url(#haloA)"/>
+  <ellipse cx="2390" cy="640" rx="920" ry="560" fill="url(#haloB)"/>
+
+  <g opacity="0.8">
+    <path d="M0 1080H520L690 910H1170" stroke="url(#trace)" stroke-width="3"/>
+    <path d="M3440 360H2890L2710 520H2260" stroke="url(#trace)" stroke-width="3"/>
+    <path d="M0 420H410L620 560H1180" stroke="url(#trace)" stroke-width="2"/>
+    <path d="M3440 1020H2960L2790 860H2270" stroke="url(#trace)" stroke-width="2"/>
+    <path d="M480 1440V1160L700 980H1030" stroke="url(#trace)" stroke-width="2"/>
+    <path d="M2960 0V280L2740 460H2410" stroke="url(#trace)" stroke-width="2"/>
+  </g>
+
+  <g opacity="0.85">
+    <circle cx="690" cy="910" r="6" fill="#AEFCFF"/>
+    <circle cx="2710" cy="520" r="6" fill="#AEFCFF"/>
+    <circle cx="620" cy="560" r="4" fill="#AEFCFF"/>
+    <circle cx="2790" cy="860" r="4" fill="#AEFCFF"/>
+    <circle cx="700" cy="980" r="4" fill="#AEFCFF"/>
+    <circle cx="2740" cy="460" r="4" fill="#AEFCFF"/>
+  </g>
+
+  <g transform="translate(1720 720)">
+    <g opacity="0.18">
+      <polygon points="0,-360 312,-180 312,180 0,360 -312,180 -312,-180" stroke="#CFFDFF" stroke-width="1.2"/>
+      <polygon points="0,-470 406,-235 406,235 0,470 -406,235 -406,-235" stroke="#CFFDFF" stroke-width="1"/>
+      <polygon points="0,-590 510,-295 510,295 0,590 -510,295 -510,-295" stroke="#CFFDFF" stroke-width="1"/>
+    </g>
+
+    <g opacity="0.86">
+      <polygon points="0,-250 217,-125 217,125 0,250 -217,125 -217,-125" fill="url(#panelFill)" stroke="url(#coreStroke)" stroke-width="3"/>
+      <circle cx="0" cy="0" r="66" fill="#0B1521" fill-opacity="0.72" stroke="#CFFFFF" stroke-opacity="0.82" stroke-width="2.8"/>
+    </g>
+
+    <g filter="url(#glow)" opacity="0.26">
+      <circle cx="0" cy="0" r="182" fill="#82F4FF"/>
+    </g>
+
+    <g opacity="0.96" stroke="#D8FFFF" stroke-opacity="0.9" fill="#93F7FF" fill-opacity="0.1">
+      <g transform="rotate(0)">
+        <rect x="-24" y="-214" width="48" height="136" rx="24"/>
+        <circle cx="0" cy="-214" r="14"/>
+        <circle cx="0" cy="-78" r="14"/>
+      </g>
+      <g transform="rotate(60)">
+        <rect x="-24" y="-214" width="48" height="136" rx="24"/>
+        <circle cx="0" cy="-214" r="14"/>
+        <circle cx="0" cy="-78" r="14"/>
+      </g>
+      <g transform="rotate(120)">
+        <rect x="-24" y="-214" width="48" height="136" rx="24"/>
+        <circle cx="0" cy="-214" r="14"/>
+        <circle cx="0" cy="-78" r="14"/>
+      </g>
+      <g transform="rotate(180)">
+        <rect x="-24" y="-214" width="48" height="136" rx="24"/>
+        <circle cx="0" cy="-214" r="14"/>
+        <circle cx="0" cy="-78" r="14"/>
+      </g>
+      <g transform="rotate(240)">
+        <rect x="-24" y="-214" width="48" height="136" rx="24"/>
+        <circle cx="0" cy="-214" r="14"/>
+        <circle cx="0" cy="-78" r="14"/>
+      </g>
+      <g transform="rotate(300)">
+        <rect x="-24" y="-214" width="48" height="136" rx="24"/>
+        <circle cx="0" cy="-214" r="14"/>
+        <circle cx="0" cy="-78" r="14"/>
+      </g>
+      <circle cx="0" cy="0" r="18" fill="#D8FFFF" fill-opacity="0.92" stroke="none"/>
+    </g>
+  </g>
+
+  <g opacity="0.18">
+    <rect x="240" y="220" width="410" height="110" rx="18" fill="#0A1622" stroke="#C6FCFF" stroke-opacity="0.25"/>
+    <path d="M290 275H420" stroke="#C6FCFF" stroke-opacity="0.45" stroke-width="4" stroke-linecap="round"/>
+    <path d="M290 300H510" stroke="#C6FCFF" stroke-opacity="0.22" stroke-width="3" stroke-linecap="round"/>
+    <path d="M290 325H470" stroke="#C6FCFF" stroke-opacity="0.12" stroke-width="3" stroke-linecap="round"/>
+
+    <rect x="2780" y="1080" width="420" height="118" rx="18" fill="#0A1622" stroke="#C6FCFF" stroke-opacity="0.25"/>
+    <path d="M2835 1138H2960" stroke="#C6FCFF" stroke-opacity="0.45" stroke-width="4" stroke-linecap="round"/>
+    <path d="M2835 1163H3090" stroke="#C6FCFF" stroke-opacity="0.22" stroke-width="3" stroke-linecap="round"/>
+    <path d="M2835 1188H3010" stroke="#C6FCFF" stroke-opacity="0.12" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <rect y="1320" width="3440" height="120" fill="#040D14" fill-opacity="0.22"/>
+</svg>
