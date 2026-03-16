@@ -16,6 +16,7 @@
         "${pkgs.flatpak}/bin/flatpak --user install -y --noninteractive flathub net.devolutions.RDM"
         "${pkgs.flatpak}/bin/flatpak --user install -y --noninteractive flathub com.github.IsmaelMartinez.teams_for_linux"
         "${pkgs.flatpak}/bin/flatpak --user install -y --noninteractive flathub org.jellyfin.JellyfinDesktop"
+        "${pkgs.flatpak}/bin/flatpak --user install -y --noninteractive flathub com.bitwarden.desktop"
       ];
     };
 
