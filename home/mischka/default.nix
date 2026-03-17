@@ -21,6 +21,7 @@
     createDirectories = true;
   };
 
+  // TODO: Avatar wird nicht angewendet
   # Avatar-Bild für KDE Plasma
   home.file.".face.icon" = {
     source = ../../assets/profil_mischka.jpg;
