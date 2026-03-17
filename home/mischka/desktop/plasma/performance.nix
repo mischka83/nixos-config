@@ -81,4 +81,9 @@
     LatencyPolicy            = "extreme";
     WindowsBlockCompositing  = false;
   };
+
+  # Titelleiste auch bei maximierten Fenstern beibehalten.
+  programs.plasma.configFile."kwinrc"."Windows" = {
+    BorderlessMaximizedWindows = false;
+  };
 }
