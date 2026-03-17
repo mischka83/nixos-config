@@ -28,7 +28,7 @@
 
   # Optional: Uncomment if you experience Wayland-specific issues
   # Experimental NVIDIA Wayland support (may help with external monitor freezing)
-  hardware.nvidia.open = true;
+  hardware.nvidia.open = false;
   hardware.nvidia.modesetting.enable = true;
 
   # Optional: For debugging GPU issues, useful tools are already included:

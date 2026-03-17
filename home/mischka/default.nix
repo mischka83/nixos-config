@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   imports = [
@@ -19,6 +19,12 @@
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
+  };
+
+  # Avatar-Bild für KDE Plasma
+  home.file.".face.icon" = {
+    source = ../../../assets/profil_mischka.jpg;
+    force = true;
   };
 
   programs.home-manager.enable = true;

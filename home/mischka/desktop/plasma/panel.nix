@@ -8,7 +8,7 @@
       floating = false;        # Fixiert, nicht schwebend
       lengthMode = "fill";     # Panel füllt die gesamte Breite
       hiding = "none";         # Nicht automatisch ausblenden
-      opacity = "opaque";      # Panel vollständig sichtbar
+      opacity = "translucent";      # Panel vollständig sichtbar
 
       widgets = [
         # Nix Startmenu
@@ -36,8 +36,8 @@
               "applications:org.kde.dolphin.desktop"
               "applications:firefox.desktop"
               "applications:org.remmina.Remmina.desktop"
-              "applications:code.desktop"
               "applications:com.github.IsmaelMartinez.teams_for_linux.desktop"
+              "applications:code.desktop"
             ];
             settings = {
               showToolTips = false;
