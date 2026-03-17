@@ -23,7 +23,7 @@
 
   # Avatar-Bild für KDE Plasma
   home.file.".face.icon" = {
-    source = ../../../assets/profil_mischka.jpg;
+    source = ../../assets/profil_mischka.jpg;
     force = true;
   };
 

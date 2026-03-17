@@ -4,7 +4,7 @@
   services.desktopManager.plasma6.enable = true;
 
   # Power Button – direkter Standby-Modus ohne Abfrage (systemd logind)
-  services.logind.powerKey = "suspend";
+  services.logind.settings.Login.HandlePowerKey = "suspend";
 
   # Essential KDE Plasma applications
   environment.systemPackages = with pkgs; [
