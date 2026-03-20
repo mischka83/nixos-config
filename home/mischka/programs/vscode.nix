@@ -47,6 +47,22 @@
           }
         ];
 
+        "todohighlight.include" = [
+          "**/*.js"
+          "**/*.jsx"
+          "**/*.ts"
+          "**/*.tsx"
+          "**/*.html"
+          "**/*.css"
+          "**/*.scss"
+          "**/*.php"
+          "**/*.rb"
+          "**/*.txt"
+          "**/*.mdown"
+          "**/*.md"
+          "**/*.nix"
+        ];
+
         "markdown-preview-enhanced.previewTheme" = "github-light.css";
         "markdown-preview-enhanced.codeBlockTheme" = "github.css";
         "markdown-preview-enhanced.scrollSync" = true;

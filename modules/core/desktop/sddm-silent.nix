@@ -11,17 +11,20 @@
 
     # Verfuegbare Presets: rei, ken, silvia, everforest,
     # catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha, nord
-    theme = "rei";
+    theme = "default";
 
     # Optionale Theme-Anpassungen (>200 Optionen auf der Wiki-Seite):
     # https://github.com/uiriansan/SilentSDDM/wiki/Options
-    # settings = {
-    #   "LoginScreen.LoginArea.Avatar" = {
-    #     shape = "circle";
-    #   };
-    #   "LoginScreen" = {
-    #     background = "mein-hintergrund.jpg";
-    #   };
-    # };
+    settings = {
+      "LoginScreen.LoginArea.Avatar" = {
+        shape = "circle";
+      };
+      "LoginScreen" = {
+        background = "smoky.jpg";
+      };
+      "LockScreen" = {
+        background = "smoky.jpg";
+      };
+    };
   };
 }

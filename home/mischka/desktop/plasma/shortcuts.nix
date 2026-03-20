@@ -55,10 +55,12 @@
       "Window Quick Tile Bottom" = "Meta+Down";
 
       # Fenster-Zustand
-      "Window Close" = [ "Alt+F4" "Meta+Q" ];
-      Maximize       = "Meta+M";
-      Minimize       = "Meta+N";
-      "Show Desktop" = "Meta+D";
+      "Window Close"    = [ "Alt+F4" "Meta+Q" ];
+      Maximize           = "none";
+      Minimize           = "none";
+      "Window Maximize" = "Meta+M";
+      "Window Minimize" = "Meta+N";
+      "Show Desktop"    = "Meta+D";
     };
   };
 }
