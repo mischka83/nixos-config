@@ -13,7 +13,7 @@
 
   home.username = "mischka";
   home.homeDirectory = "/home/mischka";
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 
   # XDG User Dirs automatisch erstellen
   xdg.userDirs = {

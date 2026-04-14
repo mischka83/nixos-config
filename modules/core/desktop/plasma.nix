@@ -5,6 +5,8 @@
 
   # Power Button – direkter Standby-Modus ohne Abfrage (systemd logind)
   services.logind.settings.Login.HandlePowerKey = "suspend";
+  # Erzwingt logind-Aktion auch wenn Plasma/Powerdevil den Key abfangen will
+  services.logind.settings.Login.PowerKeyIgnoreInhibited = "yes";
 
   # Essential KDE Plasma applications
   environment.systemPackages = with pkgs; [

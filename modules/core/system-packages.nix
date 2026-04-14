@@ -23,7 +23,9 @@
     thunderbird        # Email, calendar, and chat client
     remmina            # Remote desktop client (RDP/VNC/SSH)
     rustdesk           # Remote desktop / support client
+    filezilla          # FTP/SFTP client
     vlc                # Media player
+    zapzap
 
     # Archive & Compression Tools
     unzip              # Extract ZIP archives

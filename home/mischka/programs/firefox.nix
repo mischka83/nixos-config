@@ -5,8 +5,61 @@ in
 {
   programs.firefox = {
     enable = true;
+    languagePacks = [ "de-DE" "en-US" ];
+
+    policies = {
+      # Updates & Background Services
+      AppAutoUpdate                 = false;
+      BackgroundAppUpdate           = false;
+    };
+
     profiles.mischka = {
-      name = "mischka";
+      name      = "mischka";
+      id        = 0;
+      isDefault = true;
+
+      search.engines = {
+        "Nix Packages" = {
+          urls = [
+            {
+              template = "https://search.nixos.org/packages";
+              params = [
+                { name = "channel"; value = "unstable"; }
+                { name = "query";   value = "{searchTerms}"; }
+              ];
+            }
+          ];
+          icon           = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@np" ];
+        };
+
+        "Nix Options" = {
+          urls = [
+            {
+              template = "https://search.nixos.org/options";
+              params = [
+                { name = "channel"; value = "unstable"; }
+                { name = "query";   value = "{searchTerms}"; }
+              ];
+            }
+          ];
+          icon           = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@no" ];
+        };
+
+        "NixOS Wiki" = {
+          urls = [
+            {
+              template = "https://wiki.nixos.org/w/index.php";
+              params = [
+                { name = "search"; value = "{searchTerms}"; }
+              ];
+            }
+          ];
+          icon           = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@nw" ];
+        };
+      };
 
       extensions.packages = with addons; [
         bitwarden          # Passwort-Manager
@@ -18,6 +71,10 @@ in
       ];
 
       settings = {
+        # --- Sprache: UI auf Deutsch, Englisch als Fallback ---
+        "intl.locale.requested" = "de-DE,en-US";
+        "intl.accept_languages" = "de-DE,de,en-US,en";
+
         # --- Telemetrie deaktivieren ---
         "datareporting.healthreport.uploadEnabled" = false;
         "datareporting.policy.dataSubmissionEnabled" = false;
@@ -35,7 +92,7 @@ in
         "dom.security.https_only_mode" = true;
 
         # --- Sauberer Startbildschirm ---
-        "browser.startup.homepage" = "about:blank";
+        "browser.startup.homepage" = "about:home";
         "browser.newtabpage.enabled" = false;
         "browser.newtabpage.activity-stream.showSponsored" = false;
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;

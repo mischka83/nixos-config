@@ -38,6 +38,12 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # VSCode Extensions vom Marketplace (täglicher Mirror aller ~50k Extensions)
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nixos-hardware, ... }:
@@ -68,7 +74,10 @@
           modules =
             extraModules
             ++ [
-              { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
+              { nixpkgs.overlays = [
+                  inputs.nur.overlays.default
+                  inputs.nix-vscode-extensions.overlays.default
+                ]; }
               inputs.silentSDDM.nixosModules.default
               hostModule
               home-manager.nixosModules.home-manager
