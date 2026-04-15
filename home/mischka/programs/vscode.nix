@@ -5,9 +5,8 @@
     enable = true;
     mutableExtensionsDir = false;
     profiles.default = {
-      extensions = with pkgs.vscode-marketplace; [
+      extensions = with pkgs.vscode-extensions; [
         github.copilot-chat
-        eamodio.gitlens
         shd101wyy.markdown-preview-enhanced
         jgclark.vscode-todo-highlight
         esbenp.prettier-vscode
@@ -17,7 +16,7 @@
         # Layout & Appearance
         "workbench.activityBar.location" = "top";         # Activity Bar oben
         "workbench.sideBar.location" = "left";             # Sidebar links
-        "workbench.editor.showTabs" = true;                # Editor Tabs zeigen
+        "workbench.editor.showTabs" = "multiple";          # Editor Tabs pro Gruppe
         "workbench.startupEditor" = "newUntitledFile";     # Neuer Tab beim Start
 
         # Editor

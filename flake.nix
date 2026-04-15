@@ -39,11 +39,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # VSCode Extensions vom Marketplace (täglicher Mirror aller ~50k Extensions)
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nixos-hardware, ... }:
@@ -59,6 +54,7 @@
           ];
         };
         home-manager.backupFileExtension = "hm-backup";
+        home-manager.backupCommand = "mkdir -p ~/.config/home-manager/backups && mv";
       };
 
       mkHost = {
@@ -76,7 +72,6 @@
             ++ [
               { nixpkgs.overlays = [
                   inputs.nur.overlays.default
-                  inputs.nix-vscode-extensions.overlays.default
                 ]; }
               inputs.silentSDDM.nixosModules.default
               hostModule
