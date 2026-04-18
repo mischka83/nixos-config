@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   addons = pkgs.nur.repos.rycee.firefox-addons;
 in
 {
   programs.firefox = {
-    enable = true;
+    enable = config.mischka.browser == "firefox";
     languagePacks = [ "de-DE" "en-US" ];
 
     policies = {

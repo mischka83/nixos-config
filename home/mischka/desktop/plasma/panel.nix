@@ -1,4 +1,12 @@
-{ ... }:
+{ config, ... }:
+
+let
+  browserLauncher =
+    if config.mischka.browser == "firefox" then
+      "applications:firefox.desktop"
+    else
+      "applications:google-chrome.desktop";
+in
 
 {
   programs.plasma.panels = [
@@ -34,7 +42,7 @@
             launchers = [
               "applications:systemsettings.desktop"
               "applications:org.kde.dolphin.desktop"
-              "applications:firefox.desktop"
+              browserLauncher
               "applications:org.remmina.Remmina.desktop"
               "applications:com.github.IsmaelMartinez.teams_for_linux.desktop"
               "applications:code.desktop"

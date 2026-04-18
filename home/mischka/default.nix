@@ -3,7 +3,7 @@
 {
   imports = [
     ./programs/flatpak.nix
-    ./programs/firefox.nix
+    ./programs/browser.nix
     ./programs/git.nix
     ./programs/starship.nix
     ./programs/vscode.nix
@@ -14,6 +14,8 @@
   home.username = "mischka";
   home.homeDirectory = "/home/mischka";
   home.stateVersion = "26.05";
+
+  mischka.browser = "chrome";
 
   # XDG User Dirs automatisch erstellen
   xdg.userDirs = {
