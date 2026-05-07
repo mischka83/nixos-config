@@ -7,6 +7,7 @@
     ./programs/git.nix
     ./programs/starship.nix
     ./programs/vscode.nix
+    ./programs/powershell.nix
     ./shell/zsh.nix
     ./desktop/plasma/default.nix
   ];

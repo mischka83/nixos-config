@@ -7,6 +7,7 @@
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
         github.copilot-chat
+        ms-vscode.powershell
         shd101wyy.markdown-preview-enhanced
         jgclark.vscode-todo-highlight
         esbenp.prettier-vscode
