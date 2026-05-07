@@ -16,7 +16,7 @@
   home.homeDirectory = "/home/mischka";
   home.stateVersion = "26.05";
 
-  mischka.browser = "chrome";
+  mischka.browser = "vivaldi";
 
   # XDG User Dirs automatisch erstellen
   xdg.userDirs = {
