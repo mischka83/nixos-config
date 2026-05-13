@@ -4,6 +4,8 @@ let
   browserLauncher =
     if config.mischka.browser == "firefox" then
       "applications:firefox.desktop"
+    else if config.mischka.browser == "vivaldi" then
+      "applications:vivaldi-stable.desktop"
     else
       "applications:google-chrome.desktop";
 in
@@ -41,11 +43,13 @@ in
             iconsOnly = true;
             launchers = [
               "applications:systemsettings.desktop"
+              "applications:org.kde.konsole.desktop"
               "applications:org.kde.dolphin.desktop"
               browserLauncher
               "applications:org.remmina.Remmina.desktop"
               "applications:com.github.IsmaelMartinez.teams_for_linux.desktop"
               "applications:code.desktop"
+              "applications:thunderbird.desktop"
             ];
             settings = {
               showToolTips = false;
