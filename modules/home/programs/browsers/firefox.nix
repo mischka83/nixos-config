@@ -1,10 +1,11 @@
 { config, pkgs, ... }:
 let
   addons = pkgs.nur.repos.rycee.firefox-addons;
+  profileName = config.home.username;
 in
 {
   programs.firefox = {
-    enable = config.mischka.browser == "firefox";
+    enable = builtins.elem "firefox" config.profile.browsers;
     languagePacks = [ "de-DE" "en-US" ];
 
     policies = {
@@ -13,8 +14,8 @@ in
       BackgroundAppUpdate           = false;
     };
 
-    profiles.mischka = {
-      name      = "mischka";
+    profiles.${profileName} = {
+      name      = profileName;
       id        = 0;
       isDefault = true;
 

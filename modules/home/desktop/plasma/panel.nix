@@ -1,10 +1,11 @@
 { config, ... }:
 
 let
+  primaryBrowser = builtins.head config.profile.browsers;
   browserLauncher =
-    if config.mischka.browser == "firefox" then
+    if primaryBrowser == "firefox" then
       "applications:firefox.desktop"
-    else if config.mischka.browser == "vivaldi" then
+    else if primaryBrowser == "vivaldi" then
       "applications:vivaldi-stable.desktop"
     else
       "applications:google-chrome.desktop";

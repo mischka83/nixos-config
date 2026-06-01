@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  enableChrome = config.mischka.browser == "chrome";
+  enableChrome = builtins.elem "chrome" config.profile.browsers;
 in
 {
   programs.google-chrome = {

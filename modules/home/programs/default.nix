@@ -3,7 +3,7 @@
 {
   imports = [
     ./flatpak.nix
-    ./browser.nix
+    ./browsers/default.nix
     ./git.nix
     ./starship.nix
     ./vscode.nix

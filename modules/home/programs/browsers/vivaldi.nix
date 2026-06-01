@@ -1,0 +1,7 @@
+{ config, ... }:
+
+{
+  programs.vivaldi = {
+    enable = builtins.elem "vivaldi" config.profile.browsers;
+  };
+}
