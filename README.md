@@ -15,7 +15,8 @@ Persoenliche NixOS-Flake-Konfiguration fuer Host `nixos-btw` (Lenovo Legion 16AC
 - `hosts/nixos-btw/`: Host-spezifische Imports und Hardware-Config
 - `modules/core/`: Basis-Module (Boot, Netzwerk, Nutzer, Services, Pakete, Desktop, Audio)
 - `modules/optional/`: Optional aktivierbare Module (z. B. Flatpak, NVIDIA-Profile, Secure Boot)
-- `home/mischka/`: Home-Manager-Konfiguration fuer User `mischka`
+- `home/mischka/`: User-spezifische Home-Manager-Komposition fuer `mischka`
+- `modules/home/`: Wiederverwendbare Home-Manager-Module (Programs, Shell, Desktop)
 - `assets/`: Repositorieigene Assets (z. B. Wallpaper)
 
 ## Voraussetzungen
@@ -65,8 +66,9 @@ Aktivierung erfolgt ueber Imports in `hosts/nixos-btw/default.nix`.
 ## Home-Manager / Plasma
 
 - User-Konfiguration: `home/mischka/default.nix`
-- KDE-Panel, Theme, Shortcuts etc.: `home/mischka/desktop/plasma/`
-- Flatpak-User-Installationen (z. B. RDM, Teams): `home/mischka/programs/flatpak.nix`
+- Wiederverwendbare Home-Module: `modules/home/default.nix`
+- KDE-Panel, Theme, Shortcuts etc.: `modules/home/desktop/plasma/`
+- Flatpak-User-Installationen (z. B. RDM, Teams): `modules/home/programs/flatpak.nix`
 
 ## Git-Workflow (empfohlen)
 
