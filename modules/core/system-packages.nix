@@ -22,7 +22,7 @@
     # Communication & Email
     thunderbird        # Email, calendar, and chat client
     remmina            # Remote desktop client (RDP/VNC/SSH)
-    rustdesk           # Remote desktop / support client
+    rustdesk-flutter   # Remote desktop / support client (workaround for rustdesk fetch issue)
     filezilla          # FTP/SFTP client
     vlc                # Media player
     zapzap
@@ -34,6 +34,7 @@
     # Network & Download Tools
     curl               # Command-line download tool
     wget               # Download tool with retry support
+    openssl            # TLS/SSL toolkit (provides openssl CLI)
 
     # Hardware & Graphics Debugging
     pciutils           # PCI bus information utility (lspci)
