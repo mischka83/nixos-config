@@ -9,7 +9,7 @@
   home.homeDirectory = "/home/mischka";
   home.stateVersion = "26.05";
 
-  profile.browsers = [ "firefox" "vivaldi" ];
+  profile.browsers = [ "vivaldi" "firefox" ];
 
   # XDG User Dirs automatisch erstellen
   xdg.userDirs = {

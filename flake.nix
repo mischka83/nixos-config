@@ -73,7 +73,6 @@
               { nixpkgs.overlays = [
                   inputs.nur.overlays.default
                 ]; }
-              inputs.silentSDDM.nixosModules.default
               hostModule
               home-manager.nixosModules.home-manager
               (mkHome {

@@ -52,7 +52,10 @@
       }
 
       flake-update() {
-        sudo nix flake update "$NIX_FLAKE_DIR" "$@"
+        (
+          cd "$NIX_FLAKE_DIR" || return 1
+          nix flake update "$@"
+        )
       }
 
       flake-check() {
