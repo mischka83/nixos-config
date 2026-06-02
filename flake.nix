@@ -39,6 +39,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Noctalia Shell (for Niri desktop shell layer)
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nixos-hardware, ... }:
@@ -50,6 +56,7 @@
         home-manager.users.${username} = {
           imports = [
             inputs.plasma-manager.homeModules.plasma-manager
+            inputs.noctalia.homeModules.default
             homeModule
           ];
         };
