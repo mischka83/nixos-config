@@ -21,6 +21,7 @@
 
     # Communication & Email
     thunderbird        # Email, calendar, and chat client
+    teams-for-linux    # Unofficial Microsoft Teams client for Linux
     remmina            # Remote desktop client (RDP/VNC/SSH)
     rustdesk-flutter   # Remote desktop / support client (workaround for rustdesk fetch issue)
     filezilla          # FTP/SFTP client

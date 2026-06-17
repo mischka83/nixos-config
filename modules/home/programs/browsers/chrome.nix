@@ -12,7 +12,6 @@ in
       "--disable-features=AutofillServerCommunication,MediaRouter,OptimizationHints,Translate"
       "--disable-sync"
       "--lang=de"
-      "--password-store=kwallet6"
     ];
   };
 

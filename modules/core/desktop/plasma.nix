@@ -3,10 +3,20 @@
 {
   services.desktopManager.plasma6.enable = true;
 
-  # Power Button – direkter Standby-Modus ohne Abfrage (systemd logind)
-  services.logind.settings.Login.HandlePowerKey = "suspend";
-  # Erzwingt logind-Aktion auch wenn Plasma/Powerdevil den Key abfangen will
-  services.logind.settings.Login.PowerKeyIgnoreInhibited = "yes";
+  # logind fallback policy so power actions stay consistent across sessions.
+  services.logind.settings.Login = {
+    # Power Button – direkter Standby-Modus ohne Abfrage.
+    HandlePowerKey = "suspend";
+    # Erzwingt logind-Aktion auch wenn ein DE den Key abfangen will.
+    PowerKeyIgnoreInhibited = "yes";
+
+    # Suspend on lid close (battery, AC and docked/external-monitor scenarios).
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "suspend";
+    HandleLidSwitchDocked = "suspend";
+    # Keep inhibitors respected (e.g. critical updates/media scenarios).
+    LidSwitchIgnoreInhibited = "no";
+  };
 
   # Essential KDE Plasma applications
   environment.systemPackages = with pkgs; [

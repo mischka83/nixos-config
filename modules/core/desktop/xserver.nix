@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  # Kein X11-Server nötig – Plasma 6 läuft nativ unter Wayland.
-  # XKB-Layout wird trotzdem gesetzt (NixOS übernimmt es in die systemd-Konfiguration).
-  services.xserver.enable = false;
+  # SDDM runs on X11 for stability on this NVIDIA setup.
+  # Plasma sessions can still run Wayland.
+  services.xserver.enable = true;
 
   services.xserver.xkb = {
     layout = "de";
