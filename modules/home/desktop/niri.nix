@@ -11,6 +11,10 @@ in
     home.packages = with pkgs; [
       networkmanagerapplet
       polkit_gnome
+      xdg-utils
+      shared-mime-info
+      zathura
+      imv
     ];
 
     # Explicit file associations for minimal Wayland sessions.
@@ -18,17 +22,32 @@ in
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
-        "application/pdf" = [ "org.kde.okular.desktop" "okularApplication_pdf.desktop" ];
+        "application/pdf" = [ "org.pwmt.zathura.desktop" "zathura.desktop" ];
+        "application/postscript" = [ "org.pwmt.zathura.desktop" "zathura.desktop" ];
 
-        "image/jpeg" = [ "org.kde.gwenview.desktop" ];
-        "image/png" = [ "org.kde.gwenview.desktop" ];
-        "image/webp" = [ "org.kde.gwenview.desktop" ];
-        "image/gif" = [ "org.kde.gwenview.desktop" ];
-        "image/bmp" = [ "org.kde.gwenview.desktop" ];
-        "image/tiff" = [ "org.kde.gwenview.desktop" ];
-        "image/svg+xml" = [ "org.kde.gwenview.desktop" ];
+        "image/jpeg" = [ "imv.desktop" ];
+        "image/png" = [ "imv.desktop" ];
+        "image/webp" = [ "imv.desktop" ];
+        "image/gif" = [ "imv.desktop" ];
+        "image/bmp" = [ "imv.desktop" ];
+        "image/tiff" = [ "imv.desktop" ];
+        "image/svg+xml" = [ "imv.desktop" ];
+        "image/avif" = [ "imv.desktop" ];
 
         "inode/directory" = [ "org.kde.dolphin.desktop" ];
+      };
+      associations.added = {
+        "application/pdf" = [ "org.pwmt.zathura.desktop" "zathura.desktop" ];
+        "application/postscript" = [ "org.pwmt.zathura.desktop" "zathura.desktop" ];
+
+        "image/jpeg" = [ "imv.desktop" ];
+        "image/png" = [ "imv.desktop" ];
+        "image/webp" = [ "imv.desktop" ];
+        "image/gif" = [ "imv.desktop" ];
+        "image/bmp" = [ "imv.desktop" ];
+        "image/tiff" = [ "imv.desktop" ];
+        "image/svg+xml" = [ "imv.desktop" ];
+        "image/avif" = [ "imv.desktop" ];
       };
     };
 
