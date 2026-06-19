@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 let
   cfg = config.profile.desktop.niri;
@@ -7,6 +7,12 @@ in
   options.profile.desktop.niri.enable = lib.mkEnableOption "Niri + Noctalia desktop profile";
 
   config = lib.mkIf cfg.enable {
+    # Agents needed in bare Wayland sessions so NM can ask for VPN secrets.
+    home.packages = with pkgs; [
+      networkmanagerapplet
+      polkit_gnome
+    ];
+
     # Noctalia configuration module. Startup itself is handled by Niri.
     programs.noctalia = {
       enable = true;
@@ -18,10 +24,62 @@ in
       };
     };
 
+    # Automatic output switching for home/work docking setups.
+    # Kanshi matches a profile only when ALL listed outputs are physically connected.
+    # Do NOT list outputs from the other location – they won't be present and
+    # would prevent the profile from matching.
+    services.kanshi = {
+      enable = true;
+      systemdTarget = "graphical-session.target";
+      settings = [
+        {
+          # Home: one external HDMI monitor to the left of the laptop panel.
+          profile.name = "home";
+          profile.outputs = [
+            {
+              criteria = "HDMI-A-1";
+              status = "enable";
+              position = "0,0";
+            }
+            {
+              criteria = "eDP-1";
+              status = "enable";
+              position = "3440,0";
+            }
+          ];
+        }
+        {
+          # Work: two USB-C Philips monitors (DP-3 left, DP-2 right) plus laptop.
+          profile.name = "work";
+          profile.outputs = [
+            {
+              criteria = "DP-2";
+              status = "enable";
+              position = "0,0";
+            }
+            {
+              criteria = "DP-3";
+              status = "enable";
+              position = "1920,0";
+            }
+            {
+              criteria = "eDP-1";
+              status = "enable";
+              position = "3840,0";
+            }
+          ];
+        }
+      ];
+    };
+
     # Keep Niri-specific customizations in a separate include file.
     xdg.configFile."niri/noctalia-autostart.kdl".text = ''
       // Start Noctalia automatically in Niri sessions.
       spawn-at-startup "noctalia"
+      // Provide NM secret prompts and tray handling for VPN connections.
+      spawn-at-startup "nm-applet --indicator"
+      // Required so privileged session actions can open an auth dialog.
+      spawn-at-startup "polkit-gnome-authentication-agent-1"
 
       // Include Noctalia generated theme snippets when available.
       include "./noctalia.kdl"
@@ -32,6 +90,12 @@ in
     xdg.configFile."niri/noctalia.kdl".text = ''
       // Intentionally empty fallback file for Noctalia include.
     '';
+
+    # Kanshi profile switcher script.
+    xdg.configFile."niri/kanshi-switcher.sh" = {
+      text = builtins.readFile ./kanshi-switcher.sh;
+      executable = true;
+    };
 
     # Layout-safe overrides for keys that differ between keyboard layouts.
     xdg.configFile."niri/keybind-overrides.kdl".text = ''
@@ -55,17 +119,9 @@ in
         // Alternatives for US Comma/Period actions.
         Mod+N { consume-window-into-column; }
         Mod+Shift+N { expel-window-from-column; }
-      }
-    '';
 
-    # Keep monitor arrangement stable: external HDMI monitor left of laptop panel.
-    xdg.configFile."niri/monitor-layout.kdl".text = ''
-      output "HDMI-A-1" {
-        position x=-3440 y=0
-      }
-
-      output "eDP-1" {
-        position x=0 y=0
+        // Switch Kanshi display profiles via menu.
+        Mod+Shift+D { spawn "/home/mischka/.config/niri/kanshi-switcher.sh"; }
       }
     '';
 
@@ -83,10 +139,6 @@ in
 
         if ! grep -Fq 'include "./keybind-overrides.kdl"' "$cfg"; then
           printf 'include "./keybind-overrides.kdl"\n' >> "$cfg"
-        fi
-
-        if ! grep -Fq 'include "./monitor-layout.kdl"' "$cfg"; then
-          printf 'include "./monitor-layout.kdl"\n' >> "$cfg"
         fi
       fi
     '';
