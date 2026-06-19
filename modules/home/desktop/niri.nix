@@ -107,6 +107,34 @@ in
             }
           ];
         }
+        {
+          # Home variant: external 34" only, laptop panel disabled.
+          # Keep after "home" so normal home auto-matching remains the default.
+          profile.name = "home-external-only";
+          profile.outputs = [
+            {
+              criteria = "HDMI-A-1";
+              status = "enable";
+              position = "0,0";
+            }
+            {
+              criteria = "eDP-1";
+              status = "disable";
+            }
+          ];
+        }
+        {
+          # Fallback: laptop panel only.
+          # Keep this after home/work so docking profiles win when they match.
+          profile.name = "laptop-only";
+          profile.outputs = [
+            {
+              criteria = "eDP-1";
+              status = "enable";
+              position = "0,0";
+            }
+          ];
+        }
       ];
     };
 
