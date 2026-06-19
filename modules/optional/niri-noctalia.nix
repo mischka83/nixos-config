@@ -34,11 +34,13 @@
   security.pam.services.sddm.enableGnomeKeyring = true;
   security.pam.services.login.enableGnomeKeyring = true;
 
+  # Required so hyprlock can authenticate via PAM.
+  security.pam.services.hyprlock = {};
+
   # Common user-facing tools expected by Niri defaults and X11 compatibility.
   environment.systemPackages = with pkgs; [
     alacritty
     fuzzel
-    swaylock
     xwayland-satellite
   ];
 }
