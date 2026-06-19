@@ -13,6 +13,25 @@ in
       polkit_gnome
     ];
 
+    # Explicit file associations for minimal Wayland sessions.
+    # Without this, xdg-open can fall back to the browser for many file types.
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = [ "org.kde.okular.desktop" "okularApplication_pdf.desktop" ];
+
+        "image/jpeg" = [ "org.kde.gwenview.desktop" ];
+        "image/png" = [ "org.kde.gwenview.desktop" ];
+        "image/webp" = [ "org.kde.gwenview.desktop" ];
+        "image/gif" = [ "org.kde.gwenview.desktop" ];
+        "image/bmp" = [ "org.kde.gwenview.desktop" ];
+        "image/tiff" = [ "org.kde.gwenview.desktop" ];
+        "image/svg+xml" = [ "org.kde.gwenview.desktop" ];
+
+        "inode/directory" = [ "org.kde.dolphin.desktop" ];
+      };
+    };
+
     # Noctalia configuration module. Startup itself is handled by Niri.
     programs.noctalia = {
       enable = true;
