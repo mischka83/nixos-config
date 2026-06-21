@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../modules/core/default.nix
     ../../modules/optional/bluetooth.nix
+    ../../modules/optional/disable-usb-wakeup.nix
     ../../modules/optional/flatpak.nix
     ../../modules/optional/niri-noctalia.nix
     ../../modules/optional/gaming/default.nix

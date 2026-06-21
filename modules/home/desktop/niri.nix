@@ -11,6 +11,7 @@ in
     home.packages = with pkgs; [
       networkmanagerapplet
       polkit_gnome
+      gnome-disk-utility
       xdg-utils
       shared-mime-info
       zathura
