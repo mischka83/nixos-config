@@ -23,7 +23,7 @@
     GTK_USE_PORTAL = "1";
   };
 
-  # Noctalia feature prerequisites.
+  # DankMaterialShell feature prerequisites.
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
   security.polkit.enable = true;

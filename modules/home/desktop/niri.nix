@@ -13,7 +13,7 @@ let
   };
 in
 {
-  options.profile.desktop.niri.enable = lib.mkEnableOption "Niri + Noctalia desktop profile";
+  options.profile.desktop.niri.enable = lib.mkEnableOption "Niri + DankMaterialShell desktop profile";
 
   config = lib.mkIf cfg.enable {
     # Agents needed in bare Wayland sessions so NM can ask for VPN secrets.
@@ -25,6 +25,7 @@ in
       shared-mime-info
       zathura
       imv
+      dms-shell
     ];
 
     # Explicit file associations for minimal Wayland sessions.
@@ -61,35 +62,10 @@ in
       };
     };
 
-    # Noctalia configuration module. Startup itself is handled by Niri.
-    programs.noctalia = {
-      enable = true;
-      systemd.enable = false;
-    };
-
-    # Noctalia config written directly to ensure nested keys are preserved.
     # Palette reference for consistent theming across modules:
     # bg=${palette.bg} surface=${palette.surface} surface-alt=${palette.surfaceAlt}
     # text=${palette.text} muted=${palette.textMuted}
     # accent=${palette.accent} accent-soft=${palette.accentSoft}
-    xdg.configFile."noctalia/config.toml".text = ''
-      [bar.default]
-      margin_ends = 10
-
-      [theme]
-      mode = "dark"
-
-      [wallpaper]
-      directory = "~/Pictures"
-
-      [shell]
-      time_format = "{:%H:%M}"
-      date_format = "%A, %d.%m.%Y"
-
-      [widget.clock]
-      format = "{:%H:%M}\n{:%d.%m.%Y}"
-      tooltip_format = "{:%A, %d. %B %Y}"
-    '';
 
     # Automatic output switching for home/work docking setups.
     # Kanshi matches a profile only when ALL listed outputs are physically connected.
@@ -168,22 +144,42 @@ in
     };
 
     # Keep Niri-specific customizations in a separate include file.
-    xdg.configFile."niri/noctalia-autostart.kdl".text = ''
-      // Start Noctalia automatically in Niri sessions.
-      spawn-at-startup "noctalia"
+    xdg.configFile."niri/dms-autostart.kdl".text = ''
+      // Start DankMaterialShell automatically in Niri sessions.
+      spawn-at-startup "dms run"
       // Provide NM secret prompts and tray handling for VPN connections.
       spawn-at-startup "nm-applet --indicator"
       // Required so privileged session actions can open an auth dialog.
       spawn-at-startup "polkit-gnome-authentication-agent-1"
 
-      // Include Noctalia generated theme snippets when available.
-      include "./noctalia.kdl"
+      // Include DMS-generated snippets when available.
+      include "./dms/outputs.kdl"
+      include "./dms/layout.kdl"
+      include "./dms/windowrules.kdl"
+      include "./dms/cursor.kdl"
+      include "./dms/binds.kdl"
     '';
 
     # Ensure include target always exists so `niri validate` does not fail
-    # before Noctalia generated snippets are present.
-    xdg.configFile."niri/noctalia.kdl".text = ''
-      // Intentionally empty fallback file for Noctalia include.
+    # before DMS generated snippets are present.
+    xdg.configFile."niri/dms/outputs.kdl".text = ''
+      // Intentionally empty fallback file for DMS include.
+    '';
+
+    xdg.configFile."niri/dms/layout.kdl".text = ''
+      // Intentionally empty fallback file for DMS include.
+    '';
+
+    xdg.configFile."niri/dms/windowrules.kdl".text = ''
+      // Intentionally empty fallback file for DMS include.
+    '';
+
+    xdg.configFile."niri/dms/cursor.kdl".text = ''
+      // Intentionally empty fallback file for DMS include.
+    '';
+
+    xdg.configFile."niri/dms/binds.kdl".text = ''
+      // Intentionally empty fallback file for DMS include.
     '';
 
     # Kanshi profile switcher script.
@@ -228,9 +224,11 @@ in
         # Remove legacy include from previous nm-applet setup.
         sed -i '/include "\.\/networkmanager\.kdl"/d' "$cfg"
 
-        if ! grep -Fq 'include "./noctalia-autostart.kdl"' "$cfg"; then
-          printf '\ninclude "./noctalia-autostart.kdl"\n' >> "$cfg"
+        if ! grep -Fq 'include "./dms-autostart.kdl"' "$cfg"; then
+          printf '\ninclude "./dms-autostart.kdl"\n' >> "$cfg"
         fi
+
+        sed -i '/include "\.\/noctalia-autostart\.kdl"/d' "$cfg"
 
         if ! grep -Fq 'include "./keybind-overrides.kdl"' "$cfg"; then
           printf 'include "./keybind-overrides.kdl"\n' >> "$cfg"

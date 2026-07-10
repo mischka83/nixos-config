@@ -58,7 +58,7 @@ sudo nixos-rebuild build --flake .#nixos-btw
 Aktivierung erfolgt ueber Imports in `hosts/nixos-btw/default.nix`.
 
 - `modules/optional/flatpak.nix`: Flatpak systemweit aktivieren
-- `modules/optional/niri-noctalia.nix`: Niri-Session + Noctalia-Voraussetzungen parallel zu Plasma
+- `modules/optional/niri-noctalia.nix`: Niri-Session + DankMaterialShell-Voraussetzungen parallel zu Plasma
 - `modules/optional/nvidia-hybrid.nix`: AMD iGPU + NVIDIA Offload
 - `modules/optional/nvidia-dgpu-only.nix`: NVIDIA als primaeres Rendering
 - `modules/optional/secure-boot.nix`: Vorbereitung fuer Lanzaboote/Secure Boot

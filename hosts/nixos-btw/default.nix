@@ -7,7 +7,7 @@
     ../../modules/optional/bluetooth.nix
     ../../modules/optional/disable-usb-wakeup.nix
     ../../modules/optional/flatpak.nix
-    ../../modules/optional/niri-noctalia.nix
+    ../../modules/optional/niri-noctalia.nix # Niri + DankMaterialShell prerequisites
     ../../modules/optional/gaming/default.nix
 
     # GPU profile toggle (enable exactly one):
