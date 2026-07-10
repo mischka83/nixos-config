@@ -2,6 +2,15 @@
 
 let
   cfg = config.profile.desktop.niri;
+  palette = {
+    bg = "#0F1720";
+    surface = "#16202B";
+    surfaceAlt = "#1D2A38";
+    text = "#E6EDF3";
+    textMuted = "#9FB0C0";
+    accent = "#3ECF8E";
+    accentSoft = "#2AAE78";
+  };
 in
 {
   options.profile.desktop.niri.enable = lib.mkEnableOption "Niri + Noctalia desktop profile";
@@ -56,12 +65,31 @@ in
     programs.noctalia = {
       enable = true;
       systemd.enable = false;
-      settings = {
-        theme.mode = "dark";
-        wallpaper.directory = "~/Pictures";
-        bar.default.margin_ends = 10;
-      };
     };
+
+    # Noctalia config written directly to ensure nested keys are preserved.
+    # Palette reference for consistent theming across modules:
+    # bg=${palette.bg} surface=${palette.surface} surface-alt=${palette.surfaceAlt}
+    # text=${palette.text} muted=${palette.textMuted}
+    # accent=${palette.accent} accent-soft=${palette.accentSoft}
+    xdg.configFile."noctalia/config.toml".text = ''
+      [bar.default]
+      margin_ends = 10
+
+      [theme]
+      mode = "dark"
+
+      [wallpaper]
+      directory = "~/Pictures"
+
+      [shell]
+      time_format = "{:%H:%M}"
+      date_format = "%A, %d.%m.%Y"
+
+      [widget.clock]
+      format = "{:%H:%M}\n{:%d.%m.%Y}"
+      tooltip_format = "{:%A, %d. %B %Y}"
+    '';
 
     # Automatic output switching for home/work docking setups.
     # Kanshi matches a profile only when ALL listed outputs are physically connected.

@@ -14,7 +14,7 @@
 
       toggle_acpi_wakeup() {
         local node="$1"
-        if ${pkgs.gnugrep}/bin/grep -qE "^${node}[[:space:]].*\*enabled" /proc/acpi/wakeup; then
+        if ${pkgs.gnugrep}/bin/grep -qE "^''${node}[[:space:]].*\\*enabled" /proc/acpi/wakeup; then
           echo "$node" > /proc/acpi/wakeup
         fi
       }

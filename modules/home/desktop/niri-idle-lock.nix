@@ -39,7 +39,7 @@ in
             path = "screenshot";
             blur_passes = 3;
             blur_size = 8;
-            brightness = 0.6;
+            brightness = 0.52;
           }
         ];
 
@@ -49,7 +49,7 @@ in
             text = "cmd[update:1000] date +\"%H:%M\"";
             font_size = 80;
             font_family = "Noto Sans Bold";
-            color = "rgba(255, 255, 255, 0.95)";
+            color = "rgba(230, 237, 243, 0.96)";
             position = "0, 280";
             halign = "center";
             valign = "center";
@@ -59,7 +59,7 @@ in
             text = "cmd[update:60000] date +\"%A, %d. %B %Y\"";
             font_size = 20;
             font_family = "Noto Sans";
-            color = "rgba(255, 255, 255, 0.75)";
+            color = "rgba(159, 176, 192, 0.92)";
             position = "0, 190";
             halign = "center";
             valign = "center";
@@ -69,7 +69,7 @@ in
             text = "$USER";
             font_size = 18;
             font_family = "Noto Sans";
-            color = "rgba(255, 255, 255, 0.70)";
+            color = "rgba(159, 176, 192, 0.86)";
             position = "0, -30";
             halign = "center";
             valign = "center";
@@ -83,9 +83,9 @@ in
             outline_thickness = 2;
             dots_size = 0.28;
             dots_spacing = 0.15;
-            outer_color = "rgba(255, 255, 255, 0.4)";
-            inner_color = "rgba(0, 0, 0, 0.45)";
-            font_color = "rgb(255, 255, 255)";
+            outer_color = "rgba(62, 207, 142, 0.62)";
+            inner_color = "rgba(22, 32, 43, 0.80)";
+            font_color = "rgb(230, 237, 243)";
             fade_on_empty = true;
             placeholder_text = "<i>Passwort…</i>";
             fail_text = "<i>Falsches Passwort</i>";
