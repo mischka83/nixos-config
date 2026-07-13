@@ -76,6 +76,37 @@ Aktivierung erfolgt ueber Imports in `hosts/nixos-btw/default.nix`.
 sudo reenroll-luks-tpm2
 ```
 
+## Test-Checkliste: DMS nur in Niri
+
+Nach Aenderungen an `modules/home/desktop/niri.nix`:
+
+```bash
+cd ~/nixos-config
+sudo nixos-rebuild switch --flake .#nixos-btw
+```
+
+Manuelle Session-Tests:
+
+1. In KDE Plasma anmelden.
+2. In einem Terminal pruefen, dass DMS nicht laeuft:
+
+```bash
+systemctl --user status dms.service --no-pager
+```
+
+Erwartung: Dienst ist `inactive` oder `exited` und startet nicht als laufende Shell.
+
+3. Abmelden und in Niri anmelden.
+4. Erneut pruefen:
+
+```bash
+systemctl --user status dms.service --no-pager
+```
+
+Erwartung: Dienst ist `active (running)`.
+
+5. Nochmals nach KDE zurueckwechseln und Schritt 2 wiederholen, um Session-Leaks auszuschliessen.
+
 ## Home-Manager / Plasma
 
 - User-Konfiguration: `home/mischka/default.nix`
