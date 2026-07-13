@@ -44,7 +44,15 @@ in
       };
 
       Service = {
-        ExecStart = "${pkgs.dms-shell}/bin/dms run --session";
+        # Guard against accidental startup in non-Niri sessions (e.g. KDE).
+        ExecStart = ''
+          ${pkgs.bash}/bin/bash -lc '
+            case "''${XDG_CURRENT_DESKTOP:-}" in
+              *[Nn]iri*) exec ${pkgs.dms-shell}/bin/dms run --session ;;
+              *) exit 0 ;;
+            esac
+          '
+        '';
         Restart = "on-failure";
         RestartSec = 2;
       };
