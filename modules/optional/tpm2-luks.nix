@@ -6,8 +6,15 @@ let
     #!/usr/bin/env bash
     set -euo pipefail
 
-    device="${1:-${luksDevice}}"
-    pcrs="${2:-7}"
+    device="''${1-}"
+    if [[ -z "$device" ]]; then
+      device="${luksDevice}"
+    fi
+
+    pcrs="''${2-}"
+    if [[ -z "$pcrs" ]]; then
+      pcrs="7"
+    fi
 
     if [[ "$EUID" -ne 0 ]]; then
       echo "Run as root, e.g. sudo reenroll-luks-tpm2"
