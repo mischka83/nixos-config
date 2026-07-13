@@ -17,7 +17,7 @@ Persoenliche NixOS-Flake-Konfiguration fuer Host `nixos-btw` (Lenovo Legion 16AC
 - `modules/optional/`: Optional aktivierbare Module (z. B. Flatpak, NVIDIA-Profile, Secure Boot)
 - `home/mischka/`: User-spezifische Home-Manager-Komposition fuer `mischka`
 - `modules/home/`: Wiederverwendbare Home-Manager-Module (Programs, Shell, Desktop)
-- `assets/`: Repositorieigene Assets (z. B. Wallpaper)
+- `assets/`: Repositorieigene Assets (z. B. Cheatsheets, Profilbild)
 
 ## Voraussetzungen
 
@@ -58,11 +58,23 @@ sudo nixos-rebuild build --flake .#nixos-btw
 Aktivierung erfolgt ueber Imports in `hosts/nixos-btw/default.nix`.
 
 - `modules/optional/flatpak.nix`: Flatpak systemweit aktivieren
+- `modules/optional/disable-usb-wakeup.nix`: USB-Wakeup fuer bestimmte USB-Geraete abschalten
 - `modules/optional/niri-dms.nix`: Niri-Session + DankMaterialShell-Voraussetzungen parallel zu Plasma
 - `modules/optional/nvidia-hybrid.nix`: AMD iGPU + NVIDIA Offload
 - `modules/optional/nvidia-dgpu-only.nix`: NVIDIA als primaeres Rendering
+- `modules/optional/rdm-fhs.nix`: Devolutions Remote Desktop Manager als FHS-Testpaket
 - `modules/optional/secure-boot.nix`: Vorbereitung fuer Lanzaboote/Secure Boot
 - `modules/optional/tpm2-luks.nix`: TPM2/LUKS-Integration
+
+## TPM2/LUKS Betrieb
+
+- Re-Enroll ist normalerweise **nicht** bei regulaeren Rebuilds noetig.
+- Typischer Trigger fuer Re-Enroll: Firmware-/Secure-Boot-Aenderungen oder TPM-Reset.
+- Helper-Kommando (aus `modules/optional/tpm2-luks.nix`):
+
+```bash
+sudo reenroll-luks-tpm2
+```
 
 ## Home-Manager / Plasma
 
