@@ -4,10 +4,12 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/core/default.nix
+    ../../modules/optional/appimage.nix
     ../../modules/optional/bluetooth.nix
     ../../modules/optional/disable-usb-wakeup.nix
     ../../modules/optional/flatpak.nix
-    ../../modules/optional/niri-noctalia.nix # Niri + DankMaterialShell prerequisites
+    ../../modules/optional/rdm-fhs.nix
+    ../../modules/optional/niri-dms.nix # Niri + DankMaterialShell prerequisites
     ../../modules/optional/gaming/default.nix
 
     # GPU profile toggle (enable exactly one):

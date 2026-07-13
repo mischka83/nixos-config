@@ -99,6 +99,9 @@
         "security.workspace.trust.untrustedFiles" = "open";
         "security.workspace.trust.enabled" = true;
 
+        # Keep Home Manager as source of truth; avoid sync trying to overwrite settings.json
+        "settingsSync.ignoredSettings" = [ "*" ];
+
         # Extensions
         "extensions.autoUpdate" = false;                   # Automatische Updates aus (über nix gesteuert)
       };
