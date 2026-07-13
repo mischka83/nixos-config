@@ -23,6 +23,8 @@ in
       gnome-disk-utility
       xdg-utils
       shared-mime-info
+      hicolor-icon-theme
+      adwaita-icon-theme
       zathura
       imv
       quickshell

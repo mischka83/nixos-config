@@ -4,10 +4,17 @@ Persoenliche NixOS-Flake-Konfiguration fuer Host `nixos-btw` (Lenovo Legion 16AC
 
 ## Ziele
 
-- Reproduzierbare System- und User-Konfiguration mit Flakes
-- Trennung von Host-, Core- und Optional-Modulen
-- KDE Plasma declarativ ueber `plasma-manager`
-- Optionale Features (z. B. Flatpak, NVIDIA-Profile, Secure Boot) gezielt ein-/ausschaltbar
+Status der Hauptziele:
+
+- [x] Reproduzierbare System- und User-Konfiguration mit Flakes
+- [x] Trennung von Host-, Core- und Optional-Modulen
+- [x] KDE Plasma declarativ ueber `plasma-manager`
+- [x] Optionale Features (z. B. Flatpak, NVIDIA-Profile, Secure Boot) gezielt ein-/ausschaltbar
+
+Offene Punkte / naechste Schritte:
+
+- [ ] DMS-Verhalten zwischen KDE und Niri im Alltag weiter verifizieren (kein unbeabsichtigter KDE-Start)
+- [ ] Optional-Module weiter in der README mit kurzen "wann aktivieren"-Hinweisen dokumentieren
 
 ## Repository-Aufbau
 

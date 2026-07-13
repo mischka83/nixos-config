@@ -1,3 +1,24 @@
+# Optional module: Devolutions Remote Desktop Manager in an FHS sandbox
+#
+# Purpose:
+# - Run the upstream proprietary RDM .deb package on NixOS without patching the
+#   vendor binary directly.
+# - Keep this integration isolated as a test module that can be enabled/disabled
+#   via host imports.
+#
+# What this module provides:
+# - Downloads and unpacks a pinned RDM .deb version.
+# - Wraps the app in buildFHSEnv with required runtime libraries.
+# - Provides launcher command: remotedesktopmanager-fhs
+# - Installs a desktop entry: "Remote Desktop Manager (FHS Test)"
+#
+# Activation:
+# - Import this module in hosts/<host>/default.nix.
+# - Rebuild: sudo nixos-rebuild switch --flake .#<host>
+#
+# Rollback:
+# - Remove the module import from the host config and rebuild.
+
 { pkgs, ... }:
 
 let
@@ -111,16 +132,38 @@ EOF
     desktopName = "Remote Desktop Manager (FHS Test)";
     comment = "Proprietary DEB app in a local FHS sandbox";
     exec = "remotedesktopmanager-fhs %U";
+    icon = "remotedesktopmanager-fhs";
     terminal = false;
     type = "Application";
     categories = [ "Network" "RemoteAccess" ];
   };
+
+  rdmIconTheme = pkgs.runCommand "remotedesktopmanager-fhs-icon" { } ''
+    mkdir -p "$out/share/icons/hicolor/256x256/apps"
+
+    # Prefer the vendor icon from the unpacked .deb payload.
+    for candidate in \
+      "${rdmUnpacked}/usr/share/icons/hicolor/256x256/apps/remotedesktopmanager.png" \
+      "${rdmUnpacked}/usr/share/pixmaps/remotedesktopmanager.png" \
+      "${rdmUnpacked}/usr/share/icons/hicolor/512x512/apps/remotedesktopmanager.png"
+    do
+      if [[ -f "$candidate" ]]; then
+        cp "$candidate" "$out/share/icons/hicolor/256x256/apps/remotedesktopmanager-fhs.png"
+        exit 0
+      fi
+    done
+
+    # Fallback icon so launchers never show a blank icon tile.
+    cp "${pkgs.nixos-icons}/share/icons/hicolor/256x256/apps/nix-snowflake.png" \
+      "$out/share/icons/hicolor/256x256/apps/remotedesktopmanager-fhs.png"
+  '';
 
   rdmFhsPackage = pkgs.symlinkJoin {
     name = "remotedesktopmanager-fhs-test";
     paths = [
       rdmFhsLauncher
       rdmDesktopItem
+      rdmIconTheme
     ];
   };
 in
