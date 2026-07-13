@@ -49,6 +49,7 @@ let
       libdrm
       libpulseaudio
       libsecret
+      libusb1
       libxkbcommon
       mesa
       nspr
@@ -59,17 +60,19 @@ let
       udev
       wayland
       xdotool
-      xorg.libX11
-      xorg.libXcomposite
-      xorg.libXcursor
-      xorg.libXdamage
-      xorg.libXext
-      xorg.libXfixes
-      xorg.libXi
-      xorg.libXrandr
-      xorg.libXrender
-      xorg.libXScrnSaver
-      xorg.libXtst
+      libX11
+      libICE
+      libSM
+      libXcomposite
+      libXcursor
+      libXdamage
+      libXext
+      libXfixes
+      libXi
+      libXrandr
+      libXrender
+      libXScrnSaver
+      libXtst
       zlib
     ];
 
@@ -77,6 +80,26 @@ let
   };
 
   rdmFhsLauncher = pkgs.writeShellScriptBin "remotedesktopmanager-fhs" ''
+    rdm_xdg_config_home="''${XDG_CONFIG_HOME:-$HOME/.config}/rdm-fhs"
+    rdm_xdg_data_home="''${XDG_DATA_HOME:-$HOME/.local/share}/rdm-fhs"
+    rdm_xdg_cache_home="''${XDG_CACHE_HOME:-$HOME/.cache}/rdm-fhs"
+
+    mkdir -p "$rdm_xdg_config_home/gtk-3.0" "$rdm_xdg_data_home" "$rdm_xdg_cache_home"
+
+    # Prevent host KDE GTK modules (colorreload/appmenu) from being injected.
+    cat > "$rdm_xdg_config_home/gtk-3.0/settings.ini" <<'EOF'
+[Settings]
+gtk-application-prefer-dark-theme=true
+EOF
+
+    export XDG_CONFIG_HOME="$rdm_xdg_config_home"
+    export XDG_DATA_HOME="$rdm_xdg_data_home"
+    export XDG_CACHE_HOME="$rdm_xdg_cache_home"
+
+    export GTK_PATH=""
+    export GTK_MODULES=""
+    unset GTK3_MODULES
+
     export DOTNET_EnableWriteXorExecute=0
     export GDK_BACKEND=x11
 

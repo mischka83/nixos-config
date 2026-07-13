@@ -8,6 +8,7 @@
     ../../modules/optional/bluetooth.nix
     ../../modules/optional/disable-usb-wakeup.nix
     ../../modules/optional/flatpak.nix
+    ../../modules/optional/secure-boot.nix
     ../../modules/optional/rdm-fhs.nix
     ../../modules/optional/niri-dms.nix # Niri + DankMaterialShell prerequisites
     ../../modules/optional/gaming/default.nix

@@ -25,8 +25,32 @@ in
       shared-mime-info
       zathura
       imv
+      quickshell
       dms-shell
+      matugen
+      dgop
+      cava
+      dsearch
+      ddcutil
+      i2c-tools
     ];
+
+    # Start DMS as a managed user service so status checks report it enabled.
+    systemd.user.services.dms = {
+      Unit = {
+        Description = "DankMaterialShell";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        ExecStart = "${pkgs.dms-shell}/bin/dms run --session";
+        Restart = "on-failure";
+        RestartSec = 2;
+      };
+
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
 
     # Explicit file associations for minimal Wayland sessions.
     # Without this, xdg-open can fall back to the browser for many file types.
@@ -145,10 +169,8 @@ in
 
     # Keep Niri-specific customizations in a separate include file.
     xdg.configFile."niri/dms-autostart.kdl".text = ''
-      // Start DankMaterialShell automatically in Niri sessions.
-      spawn-at-startup "dms run"
       // Provide NM secret prompts and tray handling for VPN connections.
-      spawn-at-startup "nm-applet --indicator"
+      spawn-at-startup "nm-applet" "--indicator"
       // Required so privileged session actions can open an auth dialog.
       spawn-at-startup "polkit-gnome-authentication-agent-1"
 
@@ -188,6 +210,70 @@ in
       executable = true;
     };
 
+    # VPN connect/disconnect helper for NetworkManager profiles.
+    xdg.configFile."niri/vpn-switcher.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+        set -euo pipefail
+
+        NMCLI_BIN="$(command -v nmcli 2>/dev/null || true)"
+        FUZZEL_BIN="$(command -v fuzzel 2>/dev/null || true)"
+        ALACRITTY_BIN="$(command -v alacritty 2>/dev/null || true)"
+
+        if [[ -z "$NMCLI_BIN" || -z "$FUZZEL_BIN" ]]; then
+          dms notify --title "VPN" --message "nmcli or fuzzel not found"
+          exit 1
+        fi
+
+        all_vpns="$($NMCLI_BIN -t -f NAME,TYPE connection show | awk -F: '$2=="vpn" { print $1 }')"
+        active_vpns="$($NMCLI_BIN -t -f NAME,TYPE connection show --active | awk -F: '$2=="vpn" { print $1 }')"
+
+        if [[ -z "$all_vpns" ]]; then
+          dms notify --title "VPN" --message "No VPN profiles found in NetworkManager"
+          exit 0
+        fi
+
+        menu_entries=""
+        while IFS= read -r name; do
+          [[ -z "$name" ]] && continue
+          if printf '%s\n' "$active_vpns" | grep -Fxq "$name"; then
+            menu_entries+="Disconnect: $name"$'\n'
+          else
+            menu_entries+="Connect: $name"$'\n'
+          fi
+        done <<< "$all_vpns"
+
+        selection="$(printf '%s' "$menu_entries" | "$FUZZEL_BIN" --dmenu --prompt "VPN: ")"
+        [[ -z "$selection" ]] && exit 0
+
+        action="''${selection%%:*}"
+        profile="''${selection#*: }"
+
+        if [[ "$action" == "Disconnect" ]]; then
+          if "$NMCLI_BIN" connection down id "$profile" >/dev/null 2>&1; then
+            dms notify --title "VPN" --message "Disconnected: $profile"
+          else
+            dms notify --title "VPN" --message "Failed to disconnect: $profile"
+            exit 1
+          fi
+          exit 0
+        fi
+
+        if "$NMCLI_BIN" connection up id "$profile" >/dev/null 2>&1; then
+          dms notify --title "VPN" --message "Connected: $profile"
+          exit 0
+        fi
+
+        # Some VPNs require secrets at connect time; open an interactive terminal prompt.
+        if [[ -n "$ALACRITTY_BIN" ]]; then
+          "$ALACRITTY_BIN" -e bash -lc "nmcli --ask connection up id \"$profile\"; echo; echo 'Press Enter to close'; read"
+        else
+          dms notify --title "VPN" --message "VPN needs credentials; run: nmcli --ask connection up id '$profile'"
+        fi
+      '';
+      executable = true;
+    };
+
     # Layout-safe overrides for keys that differ between keyboard layouts.
     xdg.configFile."niri/keybind-overrides.kdl".text = ''
       binds {
@@ -213,6 +299,9 @@ in
 
         // Switch Kanshi display profiles via menu.
         Mod+Shift+D { spawn "/home/mischka/.config/niri/kanshi-switcher.sh"; }
+
+        // Connect/disconnect VPN profiles via menu.
+        Mod+Shift+V { spawn "/home/mischka/.config/niri/vpn-switcher.sh"; }
       }
     '';
 
@@ -221,6 +310,21 @@ in
     home.activation.ensureNiriIncludes = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       cfg="$HOME/.config/niri/config.kdl"
       if [ -f "$cfg" ]; then
+        # Ensure Niri uses German keyboard layout in Wayland sessions.
+        if ! grep -Eq '^[[:space:]]*layout[[:space:]]+"de"[[:space:]]*$' "$cfg"; then
+          if grep -Fq '// layout "us,ru"' "$cfg"; then
+            sed -i 's@// layout "us,ru"@layout "de"@' "$cfg"
+          elif ! grep -Eq '^[[:space:]]*layout[[:space:]]+"[^"]+"[[:space:]]*$' "$cfg"; then
+            awk '
+              { print }
+              !done && $0 ~ /^[[:space:]]*xkb[[:space:]]*\{[[:space:]]*$/ {
+                print "            layout \"de\""
+                done = 1
+              }
+            ' "$cfg" > "$cfg.tmp" && mv "$cfg.tmp" "$cfg"
+          fi
+        fi
+
         # Remove legacy include from previous nm-applet setup.
         sed -i '/include "\.\/networkmanager\.kdl"/d' "$cfg"
 
@@ -233,6 +337,40 @@ in
         if ! grep -Fq 'include "./keybind-overrides.kdl"' "$cfg"; then
           printf 'include "./keybind-overrides.kdl"\n' >> "$cfg"
         fi
+      fi
+
+      # Seed DMS config files once so optional config checks pass and
+      # VPN controls are visible in the control center by default.
+      dms_cfg_dir="$HOME/.config/DankMaterialShell"
+      mkdir -p "$dms_cfg_dir"
+
+      if [ ! -f "$dms_cfg_dir/settings.json" ]; then
+        cat > "$dms_cfg_dir/settings.json" <<'EOF'
+{
+  "showControlCenterButton": true,
+  "controlCenterShowNetworkIcon": true,
+  "controlCenterShowVpnIcon": true,
+  "controlCenterWidgets": [
+    { "id": "volumeSlider", "enabled": true, "width": 50 },
+    { "id": "brightnessSlider", "enabled": true, "width": 50 },
+    { "id": "wifi", "enabled": true, "width": 50 },
+    { "id": "bluetooth", "enabled": true, "width": 50 },
+    { "id": "audioOutput", "enabled": true, "width": 50 },
+    { "id": "audioInput", "enabled": true, "width": 50 },
+    { "id": "nightMode", "enabled": true, "width": 50 },
+    { "id": "darkMode", "enabled": true, "width": 50 },
+    { "id": "builtin_vpn", "enabled": true, "width": 100 }
+  ]
+}
+EOF
+      fi
+
+      if [ ! -f "$dms_cfg_dir/clsettings.json" ]; then
+        cat > "$dms_cfg_dir/clsettings.json" <<'EOF'
+{
+  "history": []
+}
+EOF
       fi
     '';
   };

@@ -26,7 +26,9 @@
   # DankMaterialShell feature prerequisites.
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
+  services.fprintd.enable = true;
   security.polkit.enable = true;
+  hardware.i2c.enable = true;
 
   # Provide a desktop-agnostic Secret Service backend for Chromium/Electron
   # apps in Niri sessions and unlock it on SDDM login.
