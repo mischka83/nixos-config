@@ -77,9 +77,12 @@ let
       nss
       openssl
       pango
+      glib-networking
+      libsoup_3
       stdenv.cc.cc.lib
       udev
       wayland
+      webkitgtk_4_1
       xdotool
       libX11
       libICE
@@ -94,6 +97,9 @@ let
       libXrender
       libXScrnSaver
       libXtst
+      gst_all_1.gstreamer
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
       zlib
     ];
 
@@ -122,7 +128,18 @@ EOF
     unset GTK3_MODULES
 
     export DOTNET_EnableWriteXorExecute=0
-    export GDK_BACKEND=x11
+    # Avalonia backend in RDM currently requires X11 in this FHS setup.
+    # Allow user/session override by honoring an explicitly set GDK_BACKEND.
+    export GDK_BACKEND="''${GDK_BACKEND:-x11}"
+
+    # Mitigate WebKitGTK GPU/DMABUF regressions seen on some driver stacks.
+    export WEBKIT_DISABLE_DMABUF_RENDERER=1
+    export WEBKIT_DISABLE_COMPOSITING_MODE=1
+
+    # Keep runtime dir sane even when launched from unusual sessions.
+    if [[ -z "''${XDG_RUNTIME_DIR:-}" ]]; then
+      export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+    fi
 
     exec "${rdmFhsEnv}/bin/rdm-fhs" "$@"
   '';

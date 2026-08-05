@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   # Add a separate Niri session in SDDM while keeping Plasma available.
@@ -7,6 +7,10 @@
     # Prefer gtk file chooser integration over pulling in Nautilus.
     useNautilus = false;
   };
+
+  # Both Plasma and Niri set a default session in nixpkgs.
+  # Keep Plasma as default while still exposing Niri in SDDM.
+  services.displayManager.defaultSession = lib.mkForce "plasma";
 
   # Portal services are required for file pickers in Electron/GTK apps on Wayland.
   xdg.portal = {
