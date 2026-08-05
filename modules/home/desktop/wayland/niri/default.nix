@@ -1,7 +1,13 @@
 { lib, config, pkgs, ... }:
 
 let
-  cfg = config.profile.desktop.niri;
+  cfg = config.profile.desktop.wayland.niri;
+  dmsSessionLauncher = pkgs.writeShellScript "dms-session-launcher" ''
+    case "''${XDG_CURRENT_DESKTOP:-}" in
+      *[Nn]iri*) exec ${pkgs.dms-shell}/bin/dms run --session ;;
+      *) exit 0 ;;
+    esac
+  '';
   palette = {
     bg = "#0F1720";
     surface = "#16202B";
@@ -13,7 +19,7 @@ let
   };
 in
 {
-  options.profile.desktop.niri.enable = lib.mkEnableOption "Niri + DankMaterialShell desktop profile";
+  options.profile.desktop.wayland.niri.enable = lib.mkEnableOption "Niri + DankMaterialShell desktop profile";
 
   config = lib.mkIf cfg.enable {
     # Agents needed in bare Wayland sessions so NM can ask for VPN secrets.
@@ -47,14 +53,7 @@ in
 
       Service = {
         # Guard against accidental startup in non-Niri sessions (e.g. KDE).
-        ExecStart = ''
-          ${pkgs.bash}/bin/bash -lc '
-            case "''${XDG_CURRENT_DESKTOP:-}" in
-              *[Nn]iri*) exec ${pkgs.dms-shell}/bin/dms run --session ;;
-              *) exit 0 ;;
-            esac
-          '
-        '';
+        ExecStart = dmsSessionLauncher;
         Restart = "on-failure";
         RestartSec = 2;
       };
@@ -147,6 +146,27 @@ in
           ];
         }
         {
+          # Work variant: two USB-C Philips monitors only, laptop panel disabled.
+          # Keep next to "work" so both office layouts are easy to find and maintain.
+          profile.name = "work-external-only";
+          profile.outputs = [
+            {
+              criteria = "DP-2";
+              status = "enable";
+              position = "0,0";
+            }
+            {
+              criteria = "DP-3";
+              status = "enable";
+              position = "1920,0";
+            }
+            {
+              criteria = "eDP-1";
+              status = "disable";
+            }
+          ];
+        }
+        {
           # Home variant: external 34" only, laptop panel disabled.
           # Keep after "home" so normal home auto-matching remains the default.
           profile.name = "home-external-only";
@@ -179,6 +199,7 @@ in
 
     # Keep Niri-specific customizations in a separate include file.
     xdg.configFile."niri/dms-autostart.kdl".text = ''
+      // Keep DMS managed by the user service so it starts only once.
       // Provide NM secret prompts and tray handling for VPN connections.
       spawn-at-startup "nm-applet" "--indicator"
       // Required so privileged session actions can open an auth dialog.

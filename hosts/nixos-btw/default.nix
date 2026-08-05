@@ -11,6 +11,7 @@
     ../../modules/optional/secure-boot.nix
     ../../modules/optional/rdm-fhs.nix
     ../../modules/optional/niri-dms.nix # Niri + DankMaterialShell prerequisites
+    ../../modules/optional/hyprland-caelestia.nix # Hyprland session for Caelestia testing
     ../../modules/optional/gaming/default.nix
 
     # GPU profile toggle (enable exactly one):

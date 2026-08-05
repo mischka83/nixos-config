@@ -10,7 +10,8 @@
   home.stateVersion = "26.05";
 
   profile.browsers = [ "vivaldi" "firefox" ];
-  profile.desktop.niri.enable = true;
+  profile.desktop.wayland.niri.enable = true;
+  profile.desktop.wayland.caelestia.enable = true;
 
   # XDG User Dirs automatisch erstellen
   xdg.userDirs = {

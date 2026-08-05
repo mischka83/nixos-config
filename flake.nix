@@ -39,6 +39,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Caelestia Shell (not in nixpkgs at the moment)
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nixos-hardware, ... }:
@@ -50,6 +56,7 @@
         home-manager.users.${username} = {
           imports = [
             inputs.plasma-manager.homeModules.plasma-manager
+            inputs.caelestia-shell.homeManagerModules.default
             homeModule
           ];
         };

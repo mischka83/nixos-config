@@ -1,7 +1,7 @@
 { lib, config, ... }:
 
 let
-  cfg = config.profile.desktop.niri;
+  cfg = config.profile.desktop.wayland.niri;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -29,17 +29,13 @@ in
       enable = true;
       settings = {
         general = {
-          disable_loading_bar = true;
           hide_cursor = true;
         };
 
         background = [
           {
             monitor = "";
-            path = "screenshot";
-            blur_passes = 3;
-            blur_size = 8;
-            brightness = 0.52;
+            color = "rgba(12, 20, 28, 1.0)";
           }
         ];
 
