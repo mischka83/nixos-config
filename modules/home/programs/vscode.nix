@@ -1,13 +1,22 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    dotnet-sdk_10
+  ];
+
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = false;
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
         github.copilot-chat
+        dbaeumer.vscode-eslint
+        ms-dotnettools.csharp
+        ms-dotnettools.csdevkit
+        ms-dotnettools.vscode-dotnet-runtime
         ms-vscode.powershell
+        yy0931.vscode-sqlite3-editor
         shd101wyy.markdown-preview-enhanced
         jgclark.vscode-todo-highlight
         esbenp.prettier-vscode
@@ -104,6 +113,9 @@
 
         # Extensions
         "extensions.autoUpdate" = false;                   # Automatische Updates aus (über nix gesteuert)
+
+        # Use Nix-provided .NET for extensions to avoid runtime auto-download issues on NixOS
+        "dotnetAcquisitionExtension.sharedExistingDotnetPath" = "${pkgs.dotnet-sdk_10}/bin/dotnet";
       };
     };
   };
