@@ -63,3 +63,4 @@ Hinweis: In deiner Konfiguration ist Mod = Super.
 
 - Aktive Overrides: ~/.config/niri/keybind-overrides.kdl
 - Persistente Nix-Quelle: modules/home/desktop/niri.nix
+- Siehe auch: assets/caelestia-hyprland-keybindings-cheatsheet.md

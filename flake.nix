@@ -45,6 +45,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Upstream Hyprland flake as fallback when nixpkgs hyprland breaks.
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+    };
+
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nixos-hardware, ... }:

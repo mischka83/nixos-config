@@ -121,6 +121,11 @@ Erwartung: Dienst ist `active (running)`.
 - KDE-Panel, Theme, Shortcuts etc.: `modules/home/desktop/plasma/`
 - Flatpak-User-Installationen (z. B. RDM, Teams): `modules/home/programs/flatpak.nix`
 
+## Keybinding-Cheatsheets
+
+- Niri: `assets/niri-keybindings-cheatsheet.md`
+- Caelestia/Hyprland: `assets/caelestia-hyprland-keybindings-cheatsheet.md`
+
 ## Git-Workflow (empfohlen)
 
 ```bash
